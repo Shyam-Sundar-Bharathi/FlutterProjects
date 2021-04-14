@@ -15,14 +15,23 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => reloadTime());
+    timer = Timer.periodic(Duration(seconds: 2), (Timer t) => reloadTime());
   }
 
   Map data = {};
+  WorldTime loadTime = WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png');
+  void reloadTime() async {
 
-  void reloadTime() {
+    //WorldTime loadTime = data.isEmpty ? WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png') : WorldTime(location: data['location'],url: data['url'],flag: data['flag']);
+  print(loadTime.url);
+    await loadTime.getTime();
     setState(() {
-      data = data.isNotEmpty? data : ModalRoute.of(context).settings.arguments;
+      data = {
+        'location' : loadTime.location,
+        'time' : loadTime.time,
+        'isDaytime' : loadTime.isDaytime,
+        'flag' : loadTime.flag
+      };
     });
   }
 
