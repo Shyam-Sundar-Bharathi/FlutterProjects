@@ -51,6 +51,61 @@ class _NinjaCardState extends State<NinjaCard> {
             ),
             SizedBox(height: 30.0,),
             Text(
+              'COLLEGE',
+              style: TextStyle(
+                color: Colors.grey,
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              'Manipal Institute of Technology',
+              style: TextStyle(
+                color: Colors.amber,
+                letterSpacing: 2.0,
+                fontSize: 27.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 30.0,),
+            Text(
+              'COURSE',
+              style: TextStyle(
+                color: Colors.grey,
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              'BTech - CSE',
+              style: TextStyle(
+                color: Colors.amber,
+                letterSpacing: 2.0,
+                fontSize: 27.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 30.0,),
+            Text(
+              'SEMESTER - SECTION',
+              style: TextStyle(
+                color: Colors.grey,
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              '2 - W',
+              style: TextStyle(
+                color: Colors.amber,
+                letterSpacing: 2.0,
+                fontSize: 27.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 30.0,),
+
+            Text(
               'CURRENT CGPA',
               style: TextStyle(
                 color: Colors.grey,
@@ -77,6 +132,22 @@ class _NinjaCardState extends State<NinjaCard> {
                SizedBox(width: 10.0,),
                 Text(
                   'shyamsundarbharathi@gmail.com',
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 17.0,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.phone,
+                  color: Colors.grey,
+                ),
+                SizedBox(width: 10.0,),
+                Text(
+                  '+91 9876543210',
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 17.0,
