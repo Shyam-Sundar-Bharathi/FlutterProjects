@@ -14,6 +14,7 @@ class WorldTime{
   Future<void> getTime() async {
     try{
     //var url = Uri.parse("https://worldtimeapi.org/api/timezone/$url");
+      print(url);
     Response response = await get(Uri.parse("https://worldtimeapi.org/api/timezone/$url"));
     Map data = jsonDecode(response.body);
     String datetime = data['utc_datetime'];
@@ -35,7 +36,7 @@ class WorldTime{
   }
     catch(e) {
       print("error = $e");
-      time = "Could not fetch data. Try again! ";
+      time = "API Error. Please Wait! ";
     }
   }
 

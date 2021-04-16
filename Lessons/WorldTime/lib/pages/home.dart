@@ -15,11 +15,12 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 2), (Timer t) => reloadTime());
+    timer = Timer.periodic(Duration(seconds: 10), (Timer t) => reloadTime());
   }
 
   Map data = {};
   WorldTime loadTime = WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png');
+
   void reloadTime() async {
 
     //WorldTime loadTime = data.isEmpty ? WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png') : WorldTime(location: data['location'],url: data['url'],flag: data['flag']);
@@ -76,6 +77,9 @@ class _HomeState extends State<Home> {
                      'isDaytime' : result['isDaytime'],
                      'flag' : result['flag']
                    };
+                   /*loadTime.url=data['url'];
+                   loadTime.location=data['location'];
+                   loadTime.flag=data['flag'];*/
                  });
                 },
             style: ButtonStyle(
