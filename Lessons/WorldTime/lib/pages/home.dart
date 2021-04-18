@@ -11,27 +11,27 @@ class _HomeState extends State<Home> {
 
   Timer timer;
   int counter = 0;
+  Map data = {};
+  WorldTime loadTime = WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png');
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 10), (Timer t) => reloadTime());
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) => reloadTime());
   }
-
-  Map data = {};
-  WorldTime loadTime = WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png');
 
   void reloadTime() async {
 
-    //WorldTime loadTime = data.isEmpty ? WorldTime(location: 'Chennai', url: 'Asia/Kolkata', flag: 'india.png') : WorldTime(location: data['location'],url: data['url'],flag: data['flag']);
-  print(loadTime.url);
-    await loadTime.getTime();
+    try {await loadTime.getTime();}
+    catch (e) {
+      print(e);
+    };
     setState(() {
       data = {
         'location' : loadTime.location,
         'time' : loadTime.time,
         'isDaytime' : loadTime.isDaytime,
-        'flag' : loadTime.flag
+        'flag' : loadTime.flag,
       };
     });
   }
@@ -40,12 +40,22 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty? data : ModalRoute.of(context).settings.arguments;
-    print(data);
+    print("refresh....");
 
     String bgImage = data['isDaytime'] ? 'day.png' : 'night.png';
 
     return Scaffold(
       backgroundColor: Colors.blue[700],
+      appBar: AppBar(
+        backgroundColor: data['isDaytime'] ? Colors.blue[600] : Colors.blue[900],
+        title: Text(
+          "Shyam's WorldTime",
+          style: TextStyle(
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -75,12 +85,14 @@ class _HomeState extends State<Home> {
                      'location' : result['location'],
                      'time' : result['time'],
                      'isDaytime' : result['isDaytime'],
-                     'flag' : result['flag']
+                     'flag' : result['flag'],
+                     'url' : result['url'],
+                     'seconds' : result['seconds'],
                    };
-                   /*loadTime.url=data['url'];
+                   loadTime.url=data['url'];
                    loadTime.location=data['location'];
-                   loadTime.flag=data['flag'];*/
-                 });
+                   loadTime.flag=data['flag'];
+                });
                 },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.blue[900]) ,
@@ -109,7 +121,7 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -46,7 +46,7 @@ class _LoadingState extends State<Loading> {
               ),
             ),
             SizedBox(height: 10.0,),
-            SpinKitPumpingHeart(
+            SpinKitPouringHourglass(
               color: Colors.red,
               size: 60.0,
             )
