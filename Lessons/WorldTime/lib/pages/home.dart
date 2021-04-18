@@ -21,11 +21,7 @@ class _HomeState extends State<Home> {
   }
 
   void reloadTime() async {
-
-    try {await loadTime.getTime();}
-    catch (e) {
-      print(e);
-    };
+    await loadTime.getTime();
     setState(() {
       data = {
         'location' : loadTime.location,
