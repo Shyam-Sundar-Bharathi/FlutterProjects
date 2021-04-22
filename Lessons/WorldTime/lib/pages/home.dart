@@ -40,7 +40,10 @@ class _HomeState extends State<Home> {
         {data['seconds'] = "0$i_second";}
       else
         data['seconds'] = "$i_second";
-      data['minute'] = "$i_minute";
+      if (i_minute <10)
+        {data['minute'] = "0$i_minute";}
+      else
+        {data['minute'] = "$i_minute";}
     });
   }
 
@@ -80,6 +83,60 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.all(0),
+          children: [
+            DrawerHeader(
+                child: Text(
+                    "Menu",
+                  style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.white,
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+            ),
+            ListTile(
+              onTap: () async {
+                dynamic result = await Navigator.pushNamed(context,'/location');
+                setState(() {
+                  data = {
+                    'location' : result['location'],
+                    'hour' : result['hour'],
+                    'minute' : result['minute'],
+                    'AM/PM' : result['AM/PM'],
+                    'isDaytime' : result['isDaytime'],
+                    'flag' : result['flag'],
+                    'url' : result['url'],
+                    'seconds' : result['seconds'],
+                  };
+                  loadTime.url=data['url'];
+                  loadTime.location=data['location'];
+                  loadTime.flag=data['flag'];
+                  loadTime.seconds= data['seconds'];
+                });
+                Navigator.pop(context);
+              },
+              title: Text(
+                "Edit Location",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+              tileColor: Colors.blue[800],
+              leading: Icon(
+                Icons.edit_location_sharp,
+                color: Colors.white,
+              ),
+            ),
+          ],
+
+        )
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -91,39 +148,9 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.fromLTRB(0,100.0,0,0),
           child: Column(
             children: [
-              TextButton.icon(
-                icon: Icon(
-                    Icons.edit_location_sharp,
-                  color: Colors.white,
-                ),
-                label: Text(
-                    'Edit location',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                onPressed: () async {
-                  dynamic result = await Navigator.pushNamed(context,'/location');
-                 setState(() {
-                   data = {
-                     'location' : result['location'],
-                     'hour' : result['hour'],
-                     'minute' : result['minute'],
-                     'AM/PM' : result['AM/PM'],
-                     'isDaytime' : result['isDaytime'],
-                     'flag' : result['flag'],
-                     'url' : result['url'],
-                     'seconds' : result['seconds'],
-                   };
-                   loadTime.url=data['url'];
-                   loadTime.location=data['location'];
-                   loadTime.flag=data['flag'];
-                   loadTime.seconds= data['seconds'];
-                });
-                },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.blue[900]) ,
-            ),
+              CircleAvatar(
+                backgroundImage: AssetImage("assets/${data['flag']}"),
+                radius: 40,
               ),
               SizedBox(height: 80.0,),
               Row(
@@ -163,7 +190,7 @@ class _HomeState extends State<Home> {
               ),
               SizedBox(height: 10.0,),
               Text(
-                " ${data['seconds']}",
+                "${data['seconds']}",
                 style: TextStyle(
                   fontSize: 30.0,
                   color: Colors.grey[300],
