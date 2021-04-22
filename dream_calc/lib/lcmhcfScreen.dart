@@ -46,11 +46,15 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                   labelText: "Enter comma separated numbers",
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                    ),
                     onPressed: () {
                       setState(() {
                         choice = "LCM";
@@ -64,8 +68,12 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                    ),
                     onPressed: () {
                       setState(() {
                         choice = "HCF";
