@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dream_calc/lcmhcfCalc.dart';
-import 'package:dream_calc/centTendCalc.dart';
-class centTendCalc extends StatefulWidget {
+import 'package:dream_calc/calcs/lcmhcfCalc.dart';
+
+class lcmhcfCalc extends StatefulWidget {
   @override
-  _centTendCalcState createState() => _centTendCalcState();
+  _lcmhcfCalcState createState() => _lcmhcfCalcState();
 }
 
-class _centTendCalcState extends State<centTendCalc> {
+class _lcmhcfCalcState extends State<lcmhcfCalc> {
+
   var choice = "Answer";
   var result = "0";
   TextEditingController userInput = new TextEditingController();
@@ -21,7 +22,7 @@ class _centTendCalcState extends State<centTendCalc> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Central Tendencies Caculator",
+            "LCM HCF Caculator",
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
@@ -39,10 +40,13 @@ class _centTendCalcState extends State<centTendCalc> {
                 keyboardType: TextInputType.number,
                 enableInteractiveSelection: true,
                 inputFormatters: [
-                  FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
+                  FilteringTextInputFormatter(RegExp('[0-9, ]'), allow: true),
                 ],
                 decoration: InputDecoration(
                   labelText: "Enter comma separated numbers",
+                  labelStyle: TextStyle(
+                    fontSize: 20.0,
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -56,12 +60,12 @@ class _centTendCalcState extends State<centTendCalc> {
                     ),
                     onPressed: () {
                       setState(() {
-                        choice = "MEAN";
-                        result = mean(userInput.text);
+                        choice = "LCM";
+                        result = lcm(userInput.text);
                       });
                     },
                     child: Text(
-                      "MEAN",
+                      "LCM",
                       style: TextStyle(
                         color: Colors.black,
                       ),
@@ -75,50 +79,12 @@ class _centTendCalcState extends State<centTendCalc> {
                     ),
                     onPressed: () {
                       setState(() {
-                        choice = "MEDIAN";
-                        result = median(userInput.text);
+                        choice = "HCF";
+                        result = hcf(userInput.text);
                       });
                     },
                     child: Text(
-                      "MEDIAN",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
-                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        choice = "MODE";
-                        result = mode(userInput.text);
-                      });
-                    },
-                    child: Text(
-                      "MODE",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
-                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        choice = "RANGE";
-                        result = range(userInput.text);
-                      });
-                    },
-                    child: Text(
-                      "RANGE",
+                        "HCF",
                       style: TextStyle(
                         color: Colors.black,
                       ),

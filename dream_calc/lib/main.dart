@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:dream_calc/genCalc.dart';
-import 'package:dream_calc/lcmhcfScreen.dart';
-import 'package:dream_calc/centTendScreen.dart';
+import 'package:dream_calc/screens/genScreen.dart';
+import 'package:dream_calc/screens/lcmhcfScreen.dart';
+import 'package:dream_calc/screens/centTendScreen.dart';
+import 'package:dream_calc/screens/areaScreen.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -10,6 +11,7 @@ void main() {
       '/' : (context) => genCalc(),
       '/lcmhcf' : (context) => lcmhcfCalc(),
       '/centTend' : (context) => centTendCalc(),
+      '/area' : (context) => areaCalc(),
     },
   ));
 }
