@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:dream_calc/calcs/areaCalc.dart';
 
 class areaCalc extends StatefulWidget {
   @override
@@ -12,6 +13,14 @@ class _areaCalcState extends State<areaCalc> {
   var result = "0";
   TextEditingController userInput = new TextEditingController();
   String dropDownValue = "SQUARE";
+  Map disp = {
+    'SQUARE' : "Enter side length",
+    'CIRCLE' : "Enter radius",
+    'RECTANGLE' : "Enter length, breadth (comma separated)",
+    'TRIANGLE' : "Enter base, height (comma separated) \nor side a,b,c (comma separated)",
+    'PARALLELOGRAM' : "Enter base, height (comma separated)",
+    'RHOMBUS' : "Enter diagonal 1, diagonal 2 (comma separated)",
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +49,10 @@ class _areaCalcState extends State<areaCalc> {
                 keyboardType: TextInputType.number,
                 enableInteractiveSelection: true,
                 inputFormatters: [
-                  FilteringTextInputFormatter(RegExp('[0-9, ]'), allow: true),
+                  FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
                 ],
                 decoration: InputDecoration(
-                  labelText: "Enter ",
+                  labelText: "${disp[dropDownValue]}",
                   labelStyle: TextStyle(
                     fontSize: 20.0,
                   ),
@@ -57,7 +66,7 @@ class _areaCalcState extends State<areaCalc> {
                 ),
                 onPressed: () {
                   setState(() {
-                    //result = lcm(userInput.text);
+                    result = area(userInput.text, dropDownValue);
                   });
                 },
                 child: Text(
