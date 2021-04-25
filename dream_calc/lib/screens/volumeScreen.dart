@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dream_calc/calcs/areaCalc.dart';
+import 'package:dream_calc/calcs/volumeCalc.dart';
 
-class areaCalc extends StatefulWidget {
+class volumeCalc extends StatefulWidget {
   @override
-  _areaCalcState createState() => _areaCalcState();
+  _volumeCalcState createState() => _volumeCalcState();
 }
 
-class _areaCalcState extends State<areaCalc> {
+class _volumeCalcState extends State<volumeCalc> {
 
   var choice = "Answer";
   var result = "0";
   TextEditingController userInput = new TextEditingController();
-  String dropDownValue = "SQUARE";
+  String dropDownValue = "CUBE";
   Map disp = {
-    'SQUARE' : "Enter side length",
-    'CIRCLE' : "Enter radius",
-    'RECTANGLE' : "Enter length, breadth (comma separated)",
-    'TRIANGLE' : "Enter base, height (comma separated) \nor side a,b,c (comma separated)",
-    'PARALLELOGRAM' : "Enter base, height (comma separated)",
-    'RHOMBUS' : "Enter diagonal 1, diagonal 2 (comma separated)",
+    'CUBE' : "Enter side length",
+    'SPHERE' : "Enter radius",
+    'CUBOID' : "Enter length, breadth, height (comma separated)",
+    'CONE' : "Enter base radius, height (comma separated) \nor side a,b,c (comma separated)",
+    'CYLINDER' : "Enter base radius, height (comma separated)",
   };
 
   @override
@@ -31,7 +30,7 @@ class _areaCalcState extends State<areaCalc> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Area of 2D Shapes Caculator",
+            "Volume of 3D Shapes Caculator",
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
@@ -66,11 +65,11 @@ class _areaCalcState extends State<areaCalc> {
                 ),
                 onPressed: () {
                   setState(() {
-                    result = area(userInput.text, dropDownValue);
+                    result = volume(userInput.text, dropDownValue);
                   });
                 },
                 child: Text(
-                  "AREA",
+                  "VOLUME",
                   style: TextStyle(
                     color: Colors.black,
                   ),
@@ -83,7 +82,7 @@ class _areaCalcState extends State<areaCalc> {
                 iconSize: 72,
                 elevation: 16,
                 style: const TextStyle(
-                    color: Colors.deepPurple,
+                  color: Colors.deepPurple,
                   fontSize: 20,
                 ),
                 underline: Container(
@@ -95,7 +94,7 @@ class _areaCalcState extends State<areaCalc> {
                     dropDownValue = newValue;
                   });
                 },
-                items: <String>['SQUARE','CIRCLE','RECTANGLE','TRIANGLE','PARALLELOGRAM','RHOMBUS'].map<DropdownMenuItem<String>>((String value) {
+                items: <String>['CUBE','SPHERE','CUBOID','CYLINDER','CONE'].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -105,7 +104,7 @@ class _areaCalcState extends State<areaCalc> {
               SizedBox(height: 40),
 
               Text(
-                "AREA OF $dropDownValue = $result",
+                "VOLUME OF $dropDownValue = $result",
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -117,4 +116,3 @@ class _areaCalcState extends State<areaCalc> {
     );
   }
 }
-
