@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dream_calc/calcs/lcmhcfCalc.dart';
 import 'package:dream_calc/calcs/centTendCalc.dart';
 class centTendCalc extends StatefulWidget {
   @override
@@ -129,13 +128,87 @@ class _centTendCalcState extends State<centTendCalc> {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        choice = "STANDARD DEVIATION";
+                        result = stddev(userInput.text);
+                      });
+                    },
+                    child: Text(
+                      "STANDARD DEVIATION",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        choice = "VARIANCE";
+                        result = variance(userInput.text);
+                      });
+                    },
+                    child: Text(
+                      "VARIANCE",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        choice = "CV";
+                        result = cv(userInput.text);
+                      });
+                    },
+                    child: Text(
+                      "CO-EFFICIENT OF VARIATION",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               SizedBox(height: 40),
               Text(
-                "$choice = $result",
+                choice,
                 style: TextStyle(
                   fontSize: 30,
                 ),
-              )
+              ),
+              SizedBox(height: 10,),
+              Text(
+                result,
+                style: TextStyle(
+                  fontSize: 30,
+                ),
+              ),
             ],
           ),
         ),

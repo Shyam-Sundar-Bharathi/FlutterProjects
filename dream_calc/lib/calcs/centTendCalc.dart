@@ -1,3 +1,5 @@
+import 'dart:math';
+
 String mean (String userInput) {
   var sArray = userInput.split(",");
   var iArray = [];
@@ -70,3 +72,27 @@ String range (String userInput) {
 
 }
 
+String variance (String userInput){
+  var sArray = userInput.split(",");
+  var iArray = [];
+  var length = sArray.length;
+  var iter = 0;
+  var result = 0.0;
+  var avg = double.parse(mean(userInput));
+  // for(iter=0; iter<length; iter++)
+  //   iArray.add(double.parse(sArray[iter]));
+  for(iter=0; iter<length; iter++)
+    result += pow(avg - double.parse(sArray[iter]), 2);
+  result /= length;
+  return result.toStringAsPrecision(8);
+
+}
+
+String stddev (String userInput){
+  return (pow(double.parse(variance(userInput)),0.5)).toStringAsPrecision(8);
+
+}
+
+String cv (String userInput){
+  return (double.parse(stddev(userInput))/double.parse(mean(userInput))).toStringAsPrecision(8);
+}

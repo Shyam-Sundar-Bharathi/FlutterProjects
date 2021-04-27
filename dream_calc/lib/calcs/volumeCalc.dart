@@ -1,8 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 String volume (String userInput, String dropDownValue) {
   const pi = 3.141592653589793238;
@@ -20,6 +17,10 @@ String volume (String userInput, String dropDownValue) {
   else if (dropDownValue == "CYLINDER"){
     var arr = userInput.split(",");
     return (pi*pow((double.parse(arr[0])),2)*double.parse(arr[1])).toStringAsPrecision(8);
+  }
+  else if(dropDownValue == "CONE"){
+    var arr = userInput.split(",");
+    return ((1/3)*pi*pow(double.parse(arr[0]),2)*double.parse(arr[1])).toStringAsPrecision(8);
   }
 
 }
