@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 class myDrawer extends StatefulWidget {
   @override
   _myDrawerState createState() => _myDrawerState();
@@ -92,6 +91,24 @@ class _myDrawerState extends State<myDrawer> {
             tileColor: Colors.blue[800],
             leading: Icon(
               Icons.calculate_rounded,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox( height: 10),
+          ListTile(
+            onTap: (){
+              Navigator.pushNamed(context, '/settings');
+            },
+            title: Text(
+              "SETTINGS",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+            tileColor: Colors.blue[800],
+            leading: Icon(
+              Icons.settings,
               color: Colors.white,
             ),
           ),
