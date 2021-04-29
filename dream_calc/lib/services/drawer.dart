@@ -4,6 +4,8 @@ class myDrawer extends StatefulWidget {
   _myDrawerState createState() => _myDrawerState();
 }
 
+int precision = 8;
+dynamic result;
 class _myDrawerState extends State<myDrawer> {
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,29 @@ class _myDrawerState extends State<myDrawer> {
           ),
           ListTile(
             onTap: (){
-              Navigator.pushNamed(context, '/lcmhcf');
+              Navigator.pushReplacementNamed(context, '/', arguments: {
+                'precision' : precision,
+              });
+            },
+            title: Text(
+              "GENERAL CALCULATOR",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+            tileColor: Colors.blue[800],
+            leading: Icon(
+              Icons.calculate_rounded,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox( height: 10),
+          ListTile(
+            onTap: (){
+              Navigator.pushReplacementNamed(context, '/lcmhcf', arguments: {
+                'precision' : precision,
+              });
             },
             title: Text(
               "LCM GCD CALCULATOR",
@@ -43,7 +67,9 @@ class _myDrawerState extends State<myDrawer> {
           SizedBox( height: 10),
           ListTile(
             onTap: (){
-              Navigator.pushNamed(context, '/centTend');
+              Navigator.pushReplacementNamed(context, '/centTend',arguments: {
+                'precision' : precision,
+              });
             },
             title: Text(
               "CENTRAL TENDENCIES CALCULATOR",
@@ -61,7 +87,9 @@ class _myDrawerState extends State<myDrawer> {
           SizedBox( height: 10),
           ListTile(
             onTap: (){
-              Navigator.pushNamed(context, '/area');
+              Navigator.pushReplacementNamed(context, '/area', arguments: {
+                'precision' : precision,
+              });
             },
             title: Text(
               "AREA OF 2D SHAPES",
@@ -79,7 +107,9 @@ class _myDrawerState extends State<myDrawer> {
           SizedBox( height: 10),
           ListTile(
             onTap: (){
-              Navigator.pushNamed(context, '/volume');
+              Navigator.pushReplacementNamed(context, '/volume', arguments: {
+                'precision' : precision,
+              });
             },
             title: Text(
               "VOLUME OF 3D SHAPES",
@@ -96,8 +126,12 @@ class _myDrawerState extends State<myDrawer> {
           ),
           SizedBox( height: 10),
           ListTile(
-            onTap: (){
-              Navigator.pushNamed(context, '/settings');
+            onTap: () async {
+              result = await Navigator.pushNamed(context, '/settings');
+              setState(() {
+                precision = result['precision'];
+              });
+              print(precision);
             },
             title: Text(
               "SETTINGS",

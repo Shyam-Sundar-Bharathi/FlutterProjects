@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/volumeCalc.dart';
+import 'package:dream_calc/services/drawer.dart';
 
 class volumeCalc extends StatefulWidget {
   @override
@@ -9,6 +10,9 @@ class volumeCalc extends StatefulWidget {
 
 class _volumeCalcState extends State<volumeCalc> {
 
+  Map data = {
+    'precision' : 8,
+  };
   var choice = "Answer";
   var result = "0";
   TextEditingController userInput = new TextEditingController();
@@ -23,6 +27,8 @@ class _volumeCalcState extends State<volumeCalc> {
 
   @override
   Widget build(BuildContext context) {
+    data = data.isEmpty ? data : ModalRoute.of(context).settings.arguments;
+    precision = data['precision'];
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -39,6 +45,7 @@ class _volumeCalcState extends State<volumeCalc> {
           ),
           backgroundColor: Colors.blue,
         ),
+        drawer: myDrawer(),
         body: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
@@ -65,7 +72,7 @@ class _volumeCalcState extends State<volumeCalc> {
                 ),
                 onPressed: () {
                   setState(() {
-                    result = volume(userInput.text, dropDownValue);
+                    result = volume(userInput.text, dropDownValue, precision);
                   });
                 },
                 child: Text(
@@ -107,6 +114,12 @@ class _volumeCalcState extends State<volumeCalc> {
                 "VOLUME OF $dropDownValue = $result",
                 style: TextStyle(
                   fontSize: 25,
+                ),
+              ),
+              Text(
+                precision.toString(),
+                style: TextStyle(
+                    fontSize: 20
                 ),
               )
             ],

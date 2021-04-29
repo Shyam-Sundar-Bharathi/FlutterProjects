@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/areaCalc.dart';
+import 'package:dream_calc/services/drawer.dart';
 
 class areaCalc extends StatefulWidget {
   @override
@@ -9,6 +10,9 @@ class areaCalc extends StatefulWidget {
 
 class _areaCalcState extends State<areaCalc> {
 
+  Map data = {
+    'precision' : 8,
+  };
   var choice = "Answer";
   var result = "0";
   TextEditingController userInput = new TextEditingController();
@@ -24,6 +28,8 @@ class _areaCalcState extends State<areaCalc> {
 
   @override
   Widget build(BuildContext context) {
+    data = data.isEmpty ? data : ModalRoute.of(context).settings.arguments;
+    precision = data['precision'];
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -40,6 +46,7 @@ class _areaCalcState extends State<areaCalc> {
           ),
           backgroundColor: Colors.blue,
         ),
+        drawer: myDrawer(),
         body: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
@@ -66,7 +73,7 @@ class _areaCalcState extends State<areaCalc> {
                 ),
                 onPressed: () {
                   setState(() {
-                    result = area(userInput.text, dropDownValue);
+                    result = area(userInput.text, dropDownValue, precision);
                   });
                 },
                 child: Text(
@@ -108,6 +115,12 @@ class _areaCalcState extends State<areaCalc> {
                 "AREA OF $dropDownValue = $result",
                 style: TextStyle(
                   fontSize: 25,
+                ),
+              ),
+              Text(
+                precision.toString(),
+                style: TextStyle(
+                    fontSize: 20
                 ),
               )
             ],

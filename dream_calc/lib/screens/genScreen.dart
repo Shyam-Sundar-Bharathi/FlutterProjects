@@ -11,6 +11,9 @@ class genCalc extends StatefulWidget {
 
 class _genCalcState extends State<genCalc> {
 
+  Map data = {
+    'precision' : 8,
+  };
   var userInput = '';
   var answer = '';
   final List<String> buttons = [
@@ -57,6 +60,8 @@ class _genCalcState extends State<genCalc> {
 
   @override
   Widget build(BuildContext context) {
+    data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
+    precision = data['precision'];
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       resizeToAvoidBottomInset: true,

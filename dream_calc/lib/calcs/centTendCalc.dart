@@ -1,6 +1,6 @@
 import 'dart:math';
 
-String mean (String userInput) {
+String mean (String userInput, int precision) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -9,10 +9,10 @@ String mean (String userInput) {
     iArray.add(double.parse(sArray[iter]));
   var sum = iArray.fold(0, (a, b) => a + b);
   var mean = sum/length;
-  return mean.toString();
+  return mean.toStringAsPrecision(precision);
 }
 
-String median (String userInput) {
+String median (String userInput, int precision) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -27,10 +27,10 @@ String median (String userInput) {
       return median.toString();
     }
   median = (((iArray[((length-1)/2).floor()] + iArray[((length-1)/2).ceil()]))/2);
-  return median.toString();
+  return median.toStringAsPrecision(precision);
 }
 
-String mode (String userInput) {
+String mode (String userInput, int precision) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -57,10 +57,10 @@ String mode (String userInput) {
     if(value == modalValue)
       mode=key;
   });
-  return mode.toString();
+  return mode.toStringAsPrecision(precision);
 }
 
-String range (String userInput) {
+String range (String userInput, int precision) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -68,31 +68,31 @@ String range (String userInput) {
   for(iter=0; iter<length; iter++)
     iArray.add(double.parse(sArray[iter]));
   iArray.sort();
-  return (iArray[length-1] - iArray[0]).toString();
+  return (iArray[length-1] - iArray[0]).toStringAsPrecicion(precision);
 
 }
 
-String variance (String userInput){
+String variance (String userInput, int precision){
   var sArray = userInput.split(",");
-  var iArray = [];
+  //var iArray = [];
   var length = sArray.length;
   var iter = 0;
   var result = 0.0;
-  var avg = double.parse(mean(userInput));
+  var avg = double.parse(mean(userInput, precision));
   // for(iter=0; iter<length; iter++)
   //   iArray.add(double.parse(sArray[iter]));
   for(iter=0; iter<length; iter++)
     result += pow(avg - double.parse(sArray[iter]), 2);
   result /= length;
-  return result.toStringAsPrecision(8);
+  return result.toStringAsPrecision(precision);
 
 }
 
-String stddev (String userInput){
-  return (pow(double.parse(variance(userInput)),0.5)).toStringAsPrecision(8);
+String stddev (String userInput, int precision){
+  return (pow(double.parse(variance(userInput, 10)),0.5)).toStringAsPrecision(precision);
 
 }
 
-String cv (String userInput){
-  return (double.parse(stddev(userInput))/double.parse(mean(userInput))).toStringAsPrecision(8);
+String cv (String userInput, int precision){
+  return (double.parse(stddev(userInput, 10))/double.parse(mean(userInput, 10))).toStringAsPrecision(precision);
 }

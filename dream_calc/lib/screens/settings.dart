@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 class settings extends StatefulWidget {
   @override
@@ -11,6 +12,7 @@ class _settingsState extends State<settings> {
     return Scaffold(
       appBar: AppBar(
         title: TextButton.icon(
+          onPressed: (){},
           icon: Icon(
               Icons.settings,
             color: Colors.white,
@@ -73,7 +75,17 @@ class _settingsState extends State<settings> {
             ),
           ],
         ),
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(),
+        child: Text("APPLY"),
+        onPressed: (){
+            Navigator.pop(context, {
+              'precision': sliderValue
+            }
+            );
+        },
+      ),
     );
   }
 }

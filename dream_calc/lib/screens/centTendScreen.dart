@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/centTendCalc.dart';
+import 'package:dream_calc/services/drawer.dart';
 class centTendCalc extends StatefulWidget {
   @override
   _centTendCalcState createState() => _centTendCalcState();
 }
 
 class _centTendCalcState extends State<centTendCalc> {
+  Map data = {
+    'precision' : 8,
+  };
   var choice = "Answer";
   var result = "0";
   TextEditingController userInput = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    data = data.isEmpty ? data : ModalRoute.of(context).settings.arguments;
+    precision = data['precision'];
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -29,6 +35,7 @@ class _centTendCalcState extends State<centTendCalc> {
           ),
           backgroundColor: Colors.blue,
         ),
+        drawer: myDrawer(),
         body: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
@@ -59,7 +66,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "MEAN";
-                        result = mean(userInput.text);
+                        result = mean(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -78,7 +85,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "MEDIAN";
-                        result = median(userInput.text);
+                        result = median(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -97,7 +104,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "MODE";
-                        result = mode(userInput.text);
+                        result = mode(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -116,7 +123,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "RANGE";
-                        result = range(userInput.text);
+                        result = range(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -140,7 +147,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "STANDARD DEVIATION";
-                        result = stddev(userInput.text);
+                        result = stddev(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -159,7 +166,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "VARIANCE";
-                        result = variance(userInput.text);
+                        result = variance(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -183,7 +190,7 @@ class _centTendCalcState extends State<centTendCalc> {
                     onPressed: () {
                       setState(() {
                         choice = "CV";
-                        result = cv(userInput.text);
+                        result = cv(userInput.text, precision);
                       });
                     },
                     child: Text(
@@ -209,6 +216,12 @@ class _centTendCalcState extends State<centTendCalc> {
                   fontSize: 30,
                 ),
               ),
+              Text(
+                precision.toString(),
+                style: TextStyle(
+                    fontSize: 20
+                ),
+              )
             ],
           ),
         ),

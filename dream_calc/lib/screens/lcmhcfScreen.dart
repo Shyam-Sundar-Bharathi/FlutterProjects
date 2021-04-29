@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/lcmhcfCalc.dart';
+import 'package:dream_calc/services/drawer.dart';
 
 class lcmhcfCalc extends StatefulWidget {
   @override
@@ -31,6 +32,7 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
           ),
           backgroundColor: Colors.blue,
         ),
+        drawer: myDrawer(),
         body: Padding(
           padding: EdgeInsets.all(10.0),
           child: Column(
@@ -98,7 +100,7 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                 style: TextStyle(
                   fontSize: 30,
                 ),
-              )
+              ),
             ],
           ),
         ),
