@@ -4,6 +4,8 @@ class settings extends StatefulWidget {
   @override
   _settingsState createState() => _settingsState();
 }
+
+String dropDownColor = "BLUE";
 int sliderValue =  8;
 String alertMessage = "";
 class _settingsState extends State<settings> {
@@ -26,54 +28,98 @@ class _settingsState extends State<settings> {
           ),
         )
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
-        child: Column(
-          children: [
-            Card(
-              color: Colors.grey[200],
-              child: Column(
-                children: [
-                  Text(
-                    "Set precision for decimal values",
-                    style: TextStyle(
-                      fontSize: 20.0,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
+          child: Column(
+            children: [
+              Card(
+                color: Colors.grey[200],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Set precision for decimal values",
+                      style: TextStyle(
+                        fontSize: 25.0,
+                      ),
                     ),
-                  ),
-                  Slider(
-                    value: sliderValue.toDouble(),
-                    onChanged: (double newValue){
-                      setState(() {
-                        sliderValue = newValue.round();
-                        if (sliderValue <= 4){
-                          alertMessage = " (Not recommended)";
-                        }
-                        else if(sliderValue == 10){
-                          alertMessage = " (Perfect!)";
-                        }
-                        else{
-                          alertMessage = "";
-                        }
-                      });
-                    },
-                    min: 1.0,
-                    max: 10.0,
-                    divisions: 10,
-                    label: "Set Precision",
-                    activeColor: Colors.blue[900],
-                    inactiveColor: Colors.blue[200],
-                  ),
-                  Text(
-                    sliderValue.toString() + alertMessage,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
+                    Slider(
+                      value: sliderValue.toDouble(),
+                      onChanged: (double newValue){
+                        setState(() {
+                          sliderValue = newValue.round();
+                          if (sliderValue <= 4){
+                            alertMessage = " (Not recommended)";
+                          }
+                          else if(sliderValue == 10){
+                            alertMessage = " (Perfect!)";
+                          }
+                          else{
+                            alertMessage = "";
+                          }
+                        });
+                      },
+                      min: 1.0,
+                      max: 10.0,
+                      divisions: 10,
+                      label: "Precision",
+                      activeColor: Colors.blue[900],
+                      inactiveColor: Colors.blue[200],
                     ),
-                  )
-                ],
+                    Text(
+                      sliderValue.toString() + alertMessage,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: 20,),
+              Card(
+                color: Colors.grey[200],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Colour Theme",
+                      style: TextStyle(
+                        fontSize: 25,
+                      ),
+                    ),
+                    DropdownButton<String>(
+                      isExpanded: true,
+                      value: dropDownColor,
+                      icon: Icon(Icons.arrow_drop_down),
+                      iconSize: 72,
+                      elevation: 16,
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontSize: 20,
+                      ),
+                      underline: Container(
+                        height: 2,
+                      ),
+                      onChanged: (String newColor) {
+                        setState(() {
+                          dropDownColor = newColor;
+                        });
+                      },
+                      items: <String>['BLUE','GREEN','PINK','BLACK','PURPLE','ORANGE'].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,7 +127,8 @@ class _settingsState extends State<settings> {
         child: Text("APPLY"),
         onPressed: (){
             Navigator.pop(context, {
-              'precision': sliderValue
+              'precision': sliderValue,
+              'colourTheme' : dropDownColor,
             }
             );
         },
