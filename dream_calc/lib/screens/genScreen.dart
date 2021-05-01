@@ -209,7 +209,7 @@ class _genCalcState extends State<genCalc> {
     precision = data['precision'];
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
@@ -224,133 +224,134 @@ class _genCalcState extends State<genCalc> {
       ),
       drawer: myDrawer(),
       body: Column(
-        children: [
-          Expanded(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    alignment: Alignment.centerRight,
-                    child: TextField(
-                      readOnly: true,
-                      showCursor: true,
-                      textAlign: TextAlign.right,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      controller: userInput,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      answer,
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+          children: [
+            Expanded(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.centerRight,
+                      child: TextField(
+                        readOnly: true,
+                        showCursor: true,
+                        textAlign: TextAlign.right,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        controller: userInput,
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              child: GridView.builder(
-                itemCount: buttons.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        answer,
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                itemBuilder: (BuildContext context, int index){
-                  if(index == 0){
-                    return MyButton(
-                      buttontapped: (){},
-                      color: Colors.green[200],
-                      textColor: Colors.black,
-                      buttonText: buttons[index],
-                    );
-                  }
-                  //parenthesis
-                  if(index == 1){
-                    return MyButton(
-                      buttontapped: (){
-                        parenthesis();
-                        evaluate(userInput.text);
-                      },
-                      color: Colors.blueAccent,
-                      textColor: Colors.black,
-                      buttonText: buttons[index],
-                    );
-                  }
-                  //DELCLRBUTTON
-                   if(index == 3){
-                    return MyButton(
-                      buttontapped: (){
-                        backSpace();
-                        },
-                      buttonlongpressed: (){
-                        setState(() {
-                          userInput.text='';
-                          answer='0';
-                        });
-                      },
-                      buttonText: buttons[index],
-                      color: Colors.green[100],
-                      textColor: Colors.black,
-                      fontSize: 20.0,
-                    );
-                  }
-                  // Equal button
-                  else if (index == 18) {
-                    return MyButton(
-                      buttontapped: () {
-                        setState(() {
-                          userInput.text = answer;
-                          answer="";
-                        });
-                      },
-                      buttonText: buttons[index],
-                      color: Colors.lightGreen[700],
-                      textColor: Colors.white,
-                    );
-                  }
-                  //other buttons
-                  else{
-                    return MyButton(
-                      buttontapped: () {
-                        if(isOperator(buttons[index]))
-                          insertOperator(buttons[index]);
-                        else
-                          setState(() {
-                            insertText(buttons[index]);
-                          });
-                        //isOperator(buttons[index]) ? null : evaluate(userInput.text);
-                      },
-                      buttonText: buttons[index],
-                      color: isOperator(buttons[index])
-                          ? Colors.blueAccent
-                          : Colors.grey[200],
-                      textColor: isOperator(buttons[index])
-                          ? Colors.white
-                          : Colors.black,
-                    );
-                  }
-                },
               ),
             ),
-          ),
-        ],
-      ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                child: GridView.builder(
+                  itemCount: buttons.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                  ),
+                  itemBuilder: (BuildContext context, int index){
+                    if(index == 0){
+                      return MyButton(
+                        buttontapped: (){},
+                        color: Colors.green[200],
+                        textColor: Colors.black,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    //parenthesis
+                    if(index == 1){
+                      return MyButton(
+                        buttontapped: (){
+                          parenthesis();
+                          evaluate(userInput.text);
+                        },
+                        color: Colors.blueAccent,
+                        textColor: Colors.black,
+                        buttonText: buttons[index],
+                      );
+                    }
+                    //DELCLRBUTTON
+                     if(index == 3){
+                      return MyButton(
+                        buttontapped: (){
+                          backSpace();
+                          },
+                        buttonlongpressed: (){
+                          setState(() {
+                            userInput.text='';
+                            answer='0';
+                          });
+                        },
+                        buttonText: buttons[index],
+                        color: Colors.green[100],
+                        textColor: Colors.black,
+                        fontSize: 20.0,
+                      );
+                    }
+                    // Equal button
+                    else if (index == 18) {
+                      return MyButton(
+                        buttontapped: () {
+                          setState(() {
+                            userInput.text = answer;
+                            answer="";
+                          });
+                        },
+                        buttonText: buttons[index],
+                        color: Colors.lightGreen[700],
+                        textColor: Colors.white,
+                      );
+                    }
+                    //other buttons
+                    else{
+                      return MyButton(
+                        buttontapped: () {
+                          if(isOperator(buttons[index]))
+                            insertOperator(buttons[index]);
+                          else
+                            setState(() {
+                              insertText(buttons[index]);
+                            });
+                          //isOperator(buttons[index]) ? null : evaluate(userInput.text);
+                        },
+                        buttonText: buttons[index],
+                        color: isOperator(buttons[index])
+                            ? Colors.blueAccent
+                            : Colors.grey[200],
+                        textColor: isOperator(buttons[index])
+                            ? Colors.white
+                            : Colors.black,
+                      );
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
     );
   }
 }
+
