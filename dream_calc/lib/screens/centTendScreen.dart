@@ -216,12 +216,6 @@ class _centTendCalcState extends State<centTendCalc> {
                   fontSize: 30,
                 ),
               ),
-              Text(
-                precision.toString(),
-                style: TextStyle(
-                    fontSize: 20
-                ),
-              )
             ],
           ),
         ),

@@ -22,10 +22,10 @@ class _genCalcState extends State<genCalc> {
   var cursorPos;
   var answer = '';
   final List<String> buttons = [
-    'CLR',
+    'MENU',
     '( )',
     '^',
-    'DEL',
+    'DEL/CLR',
     '7',
     '8',
     '9',
@@ -45,7 +45,7 @@ class _genCalcState extends State<genCalc> {
   ];
 
   bool isOperator(String x) {
-    if (x == '/' || x == 'x' || x == '-' || x == '+' || x == '=') {
+    if (x == '/' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' ) {
       return true;
     }
     return false;
@@ -71,9 +71,57 @@ class _genCalcState extends State<genCalc> {
           extentOffset: textSelection.start + myTextLength,
         );
       }
+    isOperator(myText)? null : evaluate(userInput.text);
+  }
+
+  void insertOperator(String operator) {
+    if(userInput.text.length == 0)
+      if(operator=='-')
+        userInput.text+=operator;
+      else
+        return;
+
+    //
+    if(isOperator(userInput.text[userInput.text.length-1]))
+      if(operator=='-')
+        userInput.text+= '(-' ;
+      else
+        setState(() {
+          userInput.text = userInput.text.substring(0,userInput.text.length-1) + operator;
+        });
+
+    //
+    else
+      insertText(operator);
+  }
+
+  void parenthesis() {
+    int open = '('.allMatches(userInput.text).length;
+    int close = ')'.allMatches(userInput.text).length;
+    if(open==0){
+      userInput.text+='(';
+      return;
+    }
+    if(open>close){
+      if(isOperator(userInput.text[userInput.text.length - 1]) || userInput.text[userInput.text.length - 1]=='('){
+        userInput.text+='(';
+      }
+      else
+        userInput.text+=')';
+    }
+    else if(open==close){
+      if(isOperator(userInput.text[userInput.text.length - 1])){
+        userInput.text+='(';
+      }
+      else
+        userInput.text+="x(";
+    }
+
   }
 
   void backSpace() {
+    if(userInput.text.length == 0)
+      return;
     cursorPos = userInput.selection.base.offset;
     if(cursorPos < 0)
       userInput.text = userInput.text.substring(0, userInput.text.length - 1);
@@ -95,12 +143,6 @@ class _genCalcState extends State<genCalc> {
             extentOffset: textSelection.start,
           );
         }
-        // The cursor is at the beginning.
-        // if (textSelection.start == 0) {
-        //   return;
-        // }
-        // Delete the previous character
-        //final previousCodeUnit = text.codeUnitAt(textSelection.start - 1);
         else
           {
 
@@ -132,12 +174,32 @@ class _genCalcState extends State<genCalc> {
   void evaluate(String input) {
     String finaluserinput = input.replaceAll('x', '*');
     Parser p = Parser();
-    Expression exp = p.parse(finaluserinput);
-    ContextModel cm = ContextModel();
-    double eval = exp.evaluate(EvaluationType.REAL, cm);
-    setState(() {
-      answer = eval.toString();
-    });
+    try{
+      Expression exp = p.parse(finaluserinput);
+      ContextModel cm = ContextModel();
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
+      setState(() {
+        answer = eval.toString();
+      });
+      //print("END TRY");
+    }
+    on FormatException {
+      finaluserinput = finaluserinput.replaceAll('(', '');
+      finaluserinput = finaluserinput.replaceAll(')', '');
+      if(finaluserinput.length == 0){
+        setState(() {
+          answer='';
+        });
+        return;
+      }
+      //print(finaluserinput);
+      Expression exp = p.parse(finaluserinput);
+      ContextModel cm = ContextModel();
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
+      setState(() {
+        answer = eval.toString();
+      });
+    }
   }
 
 
@@ -210,56 +272,42 @@ class _genCalcState extends State<genCalc> {
                   crossAxisCount: 4,
                 ),
                 itemBuilder: (BuildContext context, int index){
-                  //clear button
                   if(index == 0){
                     return MyButton(
+                      buttontapped: (){},
+                      color: Colors.green[200],
+                      textColor: Colors.black,
+                      buttonText: buttons[index],
+                    );
+                  }
+                  //parenthesis
+                  if(index == 1){
+                    return MyButton(
                       buttontapped: (){
+                        parenthesis();
+                        evaluate(userInput.text);
+                      },
+                      color: Colors.blueAccent,
+                      textColor: Colors.black,
+                      buttonText: buttons[index],
+                    );
+                  }
+                  //DELCLRBUTTON
+                   if(index == 3){
+                    return MyButton(
+                      buttontapped: (){
+                        backSpace();
+                        },
+                      buttonlongpressed: (){
                         setState(() {
                           userInput.text='';
                           answer='0';
                         });
                       },
+                      buttonText: buttons[index],
                       color: Colors.green[100],
                       textColor: Colors.black,
-                      buttonText: buttons[index],
-                    );
-                  }
-                  // else if(index == 1){
-                  //   return MyButton(
-                  //     buttonText: buttons[index],
-                  //     color: Colors.blue[100],
-                  //     textColor: Colors.black,
-                  //   );
-                  // }
-                  // ^ button
-                  else if(index == 2){
-                    return MyButton(
-                      buttontapped: (){
-                        setState(() {
-                          userInput.text += buttons[index];
-                        });
-                      },
-                      buttonText: buttons[index],
-                      color: Colors.blue[100],
-                      textColor: Colors.black,
-                    );
-                  }
-                  // Delete button
-                  else if(index == 3){
-                    return MyButton(
-                      buttontapped: (){
-                        backSpace();
-                        // setState(() {
-                        //   userInput.text = userInput.text.substring(0, userInput.text.length - 1);
-                        // });
-                        // if(userInput.text.length == 0)
-                        //   answer="";
-                        // else if (!isOperator(userInput.text[userInput.text.length - 1]))
-                        //   evaluate();
-                        },
-                      buttonText: buttons[index],
-                      color: Colors.blue[100],
-                      textColor: Colors.black,
+                      fontSize: 20.0,
                     );
                   }
                   // Equal button
@@ -280,11 +328,13 @@ class _genCalcState extends State<genCalc> {
                   else{
                     return MyButton(
                       buttontapped: () {
-                        setState(() {
-                          //userInput.text += buttons[index];
-                          insertText(buttons[index]);
-                        });
-                        isOperator(buttons[index]) ? null : evaluate(userInput.text);
+                        if(isOperator(buttons[index]))
+                          insertOperator(buttons[index]);
+                        else
+                          setState(() {
+                            insertText(buttons[index]);
+                          });
+                        //isOperator(buttons[index]) ? null : evaluate(userInput.text);
                       },
                       buttonText: buttons[index],
                       color: isOperator(buttons[index])

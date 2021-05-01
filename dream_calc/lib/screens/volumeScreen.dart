@@ -116,12 +116,6 @@ class _volumeCalcState extends State<volumeCalc> {
                   fontSize: 25,
                 ),
               ),
-              Text(
-                precision.toString(),
-                style: TextStyle(
-                    fontSize: 20
-                ),
-              )
             ],
           ),
         ),

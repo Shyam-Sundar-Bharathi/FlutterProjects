@@ -74,6 +74,13 @@ class _settingsState extends State<settings> {
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    Text(
+                      "Higher precision means more numbers after the decimal point and greater accuracy of the answer",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
                     )
                   ],
                 ),

@@ -117,12 +117,6 @@ class _areaCalcState extends State<areaCalc> {
                   fontSize: 25,
                 ),
               ),
-              Text(
-                precision.toString(),
-                style: TextStyle(
-                    fontSize: 20
-                ),
-              )
             ],
           ),
         ),

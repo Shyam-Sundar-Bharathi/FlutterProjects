@@ -7,14 +7,17 @@ class MyButton extends StatelessWidget {
   final textColor;
   final String buttonText;
   final buttontapped;
+  final buttonlongpressed;
+  final fontSize;
 
   //Constructor
-  MyButton({this.color, this.textColor, this.buttonText, this.buttontapped});
+  MyButton({this.color, this.textColor, this.buttonText, this.buttontapped,this.buttonlongpressed,this.fontSize=25.0});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: buttontapped,
+        onLongPress: buttonlongpressed,
         child: Padding(
           padding: const EdgeInsets.all(0.2),
           child: ClipRRect(
@@ -26,7 +29,7 @@ class MyButton extends StatelessWidget {
                  buttonText,
                  style: TextStyle(
                     color: textColor,
-                    fontSize: 25,
+                    fontSize: fontSize,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
