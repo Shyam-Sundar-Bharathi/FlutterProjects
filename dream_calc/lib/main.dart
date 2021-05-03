@@ -1,3 +1,4 @@
+import 'package:dream_calc/screens/unitScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/screens/genScreen.dart';
 import 'package:dream_calc/screens/lcmhcfScreen.dart';
@@ -16,6 +17,7 @@ void main() {
       '/area' : (context) => areaCalc(),
       '/volume' : (context) => volumeCalc(),
       '/settings' : (context) => settings(),
+      '/unitConversion' : (context) => unitconversion(),
     },
   ));
 }

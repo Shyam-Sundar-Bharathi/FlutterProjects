@@ -149,6 +149,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  unit_converter:
+    dependency: "direct main"
+    description:
+      name: unit_converter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.3.0"
   vector_math:
     dependency: transitive
     description:
