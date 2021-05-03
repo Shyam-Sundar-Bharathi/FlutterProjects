@@ -18,22 +18,19 @@ class _unitconversionState extends State<unitconversion> {
   String unitElementsValue = "LENGTH";
   List<String> unitElements = ["LENGTH","MASS","TEMPERATURE"];
   Map unitChoices = {
-    'LENGTH' : ['meter','centimeter','kilometer','inch','mile'],
+    'LENGTH' : ['meter','centimeter','kilometer','inch','mile','millimeter','nanometer','micrometer'],
     'MASS' : ['kilogram','gram','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
   };
   String unitChoiceOne;
   String unitChoiceTwo;
 
-  void initState() {
-    unitChoiceOne = unitChoices[unitElementsValue][0];
-    unitChoiceTwo = unitChoices[unitElementsValue][1];
-    // selectedCategory = widget.defaultSelection;
-    // super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    unitChoiceOne = unitChoices[unitElementsValue][0];
+    unitChoiceTwo = unitChoices[unitElementsValue][1];
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
@@ -94,12 +91,8 @@ class _unitconversionState extends State<unitconversion> {
                           });
                         },
                         onChanged: (text){
-                          inFocusOne?
-                          setState((){
                             userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text);
-                          })
-                              : null;
-                        },
+                            },
                         controller: userInputOne,
                         keyboardType: TextInputType.number,
                         enableInteractiveSelection: true,
@@ -159,12 +152,8 @@ class _unitconversionState extends State<unitconversion> {
                           });
                         },
                         onChanged: (text){
-                          inFocusTwo?
-                          setState((){
                             userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text);
-                          })
-                              : null;
-                        },
+                            },
                         controller: userInputTwo,
                         keyboardType: TextInputType.number,
                         enableInteractiveSelection: true,
