@@ -10,25 +10,35 @@ class unitconversion extends StatefulWidget {
 
 class _unitconversionState extends State<unitconversion> {
 
+  Map data = {
+    'precision' : 8,
+  };
+
   bool inFocusOne = false;
   bool inFocusTwo = false;
   String answer = "answer";
   TextEditingController userInputOne = new TextEditingController();
   TextEditingController userInputTwo = new TextEditingController();
   String unitElementsValue = "LENGTH";
-  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE","PLANE ANGLE","SPEED"];
+  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE","PLANE ANGLE","SPEED","ENERGY","AREA","VOLUME"];
   Map unitChoices = {
     'LENGTH' : ['meter','centimeter','kilometer','inch','feet','mile','millimeter'],
     'MASS' : ['kilogram','gram','milligram','tonne','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
     'PLANE ANGLE' : ['degree','radian','gradian','minute','second'],
-    'SPEED' : ['meter per second', 'kilometer per hour', 'mile per hour', 'foot per second']
+    'SPEED' : ['meter per second', 'kilometer per hour', 'mile per hour', 'foot per second'],
+    'ENERGY' : ['joule','calorie','kilojoule','kilocalorie','watt hour','kilowatt hour'],
+    'AREA' : ['sq. meter', 'sq. foot', 'sq. kilometer', 'sq. centimeter', 'sq. mile', 'sq. inch', 'acre', 'hectare'],
+    'VOLUME' : ['cubic meter','liter','cubic centimeter','milliliter','cubic foot','cubic inch']
   };
   String unitChoiceOne='';
   String unitChoiceTwo='';
 
   @override
   Widget build(BuildContext context) {
+
+    data = data.isEmpty ? data : ModalRoute.of(context).settings.arguments;
+    precision = data['precision'];
 
     unitChoiceOne = unitChoiceOne==''? unitChoices[unitElementsValue][0] : unitChoiceOne;
     unitChoiceTwo = unitChoiceTwo==''? unitChoices[unitElementsValue][1] : unitChoiceTwo;
@@ -97,7 +107,7 @@ class _unitconversionState extends State<unitconversion> {
                           });
                         },
                         onChanged: (text){
-                            userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text);
+                            userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
                             },
                         controller: userInputOne,
                         keyboardType: TextInputType.number,
@@ -134,7 +144,7 @@ class _unitconversionState extends State<unitconversion> {
                       onChanged: (String newValue) {
                         setState(() {
                           unitChoiceOne = newValue;
-                          userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text);
+                          userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {
@@ -159,7 +169,7 @@ class _unitconversionState extends State<unitconversion> {
                           });
                         },
                         onChanged: (text){
-                            userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text);
+                            userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
                             },
                         controller: userInputTwo,
                         keyboardType: TextInputType.number,
@@ -196,7 +206,7 @@ class _unitconversionState extends State<unitconversion> {
                       onChanged: (String newValue) {
                         setState(() {
                           unitChoiceTwo = newValue;
-                          userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text);
+                          userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {

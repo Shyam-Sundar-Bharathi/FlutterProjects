@@ -49,14 +49,16 @@ class _settingsState extends State<settings> {
                       onChanged: (double newValue){
                         setState(() {
                           sliderValue = newValue.round();
-                          if (sliderValue <= 4){
+                          if (sliderValue <= 2){
                             alertMessage = " (Not recommended)";
                           }
-                          else if(sliderValue == 10){
-                            alertMessage = " (Perfect!)";
+                          else if(sliderValue >= 9){
+                            alertMessage = " (Oh! You're a scientist.)";
                           }
+                          else if(sliderValue >=6)
+                            alertMessage = " (Precise results on the way!)";
                           else{
-                            alertMessage = "";
+                            alertMessage = " (Good enough)";
                           }
                         });
                       },

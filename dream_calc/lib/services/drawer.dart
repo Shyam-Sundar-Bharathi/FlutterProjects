@@ -127,7 +127,9 @@ class _myDrawerState extends State<myDrawer> {
           SizedBox( height: 10),
           ListTile(
             onTap: (){
-              Navigator.pushReplacementNamed(context, '/unitConversion');
+              Navigator.pushReplacementNamed(context, '/unitConversion',arguments: {
+                'precision' : precision,
+              });
             },
             title: Text(
               'UNIT CONVERSION',
@@ -149,7 +151,6 @@ class _myDrawerState extends State<myDrawer> {
               setState(() {
                 precision = result['precision'];
               });
-              print(precision);
             },
             title: Text(
               "SETTINGS",

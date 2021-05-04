@@ -1,22 +1,130 @@
 
-String convert(String unitElement, String unitChoiceOne, String unitChoiceTwo, String userInput){
+String convert(String unitElement, String unitChoiceOne, String unitChoiceTwo, String userInput, int precision){
   if(userInput == "")
     return "";
   if(unitElement.toLowerCase() == "temperature")
     return temperature(unitChoiceOne, unitChoiceTwo, userInput);
 
-  if(unitElement.toLowerCase() == 'length')
-    return frommeter(tometer(unitChoiceOne, userInput), unitChoiceTwo);
+  if(unitElement.toLowerCase() == 'length'){
+    return(frommeter(tometer(unitChoiceOne, userInput), unitChoiceTwo, precision));
+  }
 
   if(unitElement.toLowerCase() == 'mass')
-    return fromgram(togram(unitChoiceOne, userInput), unitChoiceTwo);
+    return fromgram(togram(unitChoiceOne, userInput), unitChoiceTwo, precision);
 
   if(unitElement.toLowerCase() == 'plane angle')
-    return fromdegree(todegree(unitChoiceOne, userInput), unitChoiceTwo);
+    return fromdegree(todegree(unitChoiceOne, userInput), unitChoiceTwo, precision);
 
   if(unitElement.toLowerCase() == 'speed')
-    return frommps(tomps(unitChoiceOne, userInput), unitChoiceTwo);
+    return frommps(tomps(unitChoiceOne, userInput), unitChoiceTwo, precision);
+
+  if(unitElement.toLowerCase() == 'energy')
+    return fromjoule(tojoule(unitChoiceOne, userInput), unitChoiceTwo, precision);
+
+  if(unitElement.toLowerCase() == 'area')
+    return fromsqmeter(tosqmeter(unitChoiceOne, userInput), unitChoiceTwo, precision);
+
+  if(unitElement.toLowerCase() == 'volume')
+    return fromcumeter(tocumeter(unitChoiceOne, userInput), unitChoiceTwo, precision);
   return '100';
+}
+
+String tocumeter(String unitChoiceOne, String userInput){
+  if(unitChoiceOne == 'cubic meter')
+    return userInput;
+  if(unitChoiceOne == 'liter')
+    return (double.parse(userInput)/1000).toString();
+  if(unitChoiceOne == 'cubic centimeter')
+    return (double.parse(userInput)/1000000).toString();
+  if(unitChoiceOne == 'milliliter')
+    return (double.parse(userInput)/1000000).toString();
+  if(unitChoiceOne == 'cubic foot')
+    return (double.parse(userInput)*0.0283168).toString();
+  if(unitChoiceOne == 'cubic inch')
+    return (double.parse(userInput)/61024).toString();
+}
+
+String fromcumeter(String ans1, String unitChoiceTwo, int precision){
+  if(unitChoiceTwo == 'cubic meter')
+    return ans1;
+  if(unitChoiceTwo == 'liter')
+    return (double.parse(ans1)*1000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'cubic centimeter')
+    return (double.parse(ans1)*1000000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'milliliter')
+    return (double.parse(ans1)*1000000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'cubic foot')
+    return (double.parse(ans1)/0.0283168).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'cubic inch')
+    return (double.parse(ans1)*61024).toStringAsFixed(precision);
+}
+
+String tosqmeter(String unitChoiceOne, String userInput){
+  if(unitChoiceOne == 'sq. meter')
+    return userInput;
+  if(unitChoiceOne == 'sq. foot')
+    return (double.parse(userInput)/10.764).toString();
+  if(unitChoiceOne == 'sq. kilometer')
+    return (double.parse(userInput)*1000000).toString();
+  if(unitChoiceOne == 'sq. centimeter')
+    return (double.parse(userInput)/10000).toString();
+  if(unitChoiceOne == 'sq. mile')
+    return (double.parse(userInput)*2590000).toString();
+  if(unitChoiceOne == 'sq. inch')
+    return (double.parse(userInput)*0.00064516).toString();
+  if(unitChoiceOne == 'acre')
+    return (double.parse(userInput)*4046.86).toString();
+  if(unitChoiceOne == 'hectare')
+    return (double.parse(userInput)*10000).toString();
+}
+
+String fromsqmeter(String ans1, String unitChoiceTwo, int precision){
+  if(unitChoiceTwo == 'sq. meter')
+    return ans1;
+  if(unitChoiceTwo == 'sq. foot')
+    return (double.parse(ans1)*10.764).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'sq. kilometer')
+    return (double.parse(ans1)/1000000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'sq. centimeter')
+    return (double.parse(ans1)*10000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'sq. mile')
+    return (double.parse(ans1)/2590000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'sq. inch')
+    return (double.parse(ans1)/0.00064516).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'acre')
+    return (double.parse(ans1)/4046.86).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'hectare')
+    return (double.parse(ans1)/10000).toStringAsFixed(precision);
+}
+
+String tojoule(String unitChoiceOne, String userInput){
+  if(unitChoiceOne == 'joule')
+    return userInput;
+  if(unitChoiceOne == 'calorie')
+    return (double.parse(userInput)*4.184).toString();
+  if(unitChoiceOne == 'kilojoule')
+    return (double.parse(userInput)*1000).toString();
+  if(unitChoiceOne == 'kilocalorie')
+    return (double.parse(userInput)*4184).toString();
+  if(unitChoiceOne == 'watt hour')
+    return (double.parse(userInput)*3600).toString();
+  if(unitChoiceOne == 'kilowatt hour')
+    return (double.parse(userInput)*3600000).toString();
+}
+
+String fromjoule(String ans1, String unitChoiceTwo, int precision){
+  if(unitChoiceTwo == 'joule')
+    return ans1;
+  if(unitChoiceTwo == 'calorie')
+    return (double.parse(ans1)/4.184).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'kilojoule')
+    return (double.parse(ans1)/1000).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'kilocalorie')
+    return (double.parse(ans1)/4184).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'watt hour')
+    return (double.parse(ans1)/3600).toStringAsFixed(precision);
+  if(unitChoiceTwo == 'kilowatt hour')
+    return (double.parse(ans1)/3600000).toStringAsFixed(precision);
 }
 
 String tomps (String unitChoiceOne, String userInput){
@@ -30,15 +138,15 @@ String tomps (String unitChoiceOne, String userInput){
     return (double.parse(userInput)*0.3048).toString();
 }
 
-String frommps (String ans1, String unitChoiceTwo){
+String frommps (String ans1, String unitChoiceTwo, int precision){
   if(unitChoiceTwo == 'meter per second')
     return ans1;
   if(unitChoiceTwo == 'kilometer per hour')
-    return (double.parse(ans1)*3.6).toString();
+    return (double.parse(ans1)*3.6).toStringAsFixed(precision);
   if(unitChoiceTwo == 'mile per hour')
-    return (double.parse(ans1)*2.237).toString();
+    return (double.parse(ans1)*2.237).toStringAsFixed(precision);
   if(unitChoiceTwo == 'foot per second')
-    return (double.parse(ans1)/0.3048).toString();
+    return (double.parse(ans1)/0.3048).toStringAsFixed(precision);
 }
 
 String todegree(String unitChoiceOne, String userInput){
@@ -54,17 +162,17 @@ String todegree(String unitChoiceOne, String userInput){
     return (double.parse(userInput)/3600).toString();
 }
 
-String fromdegree (String ans1, String unitChoiceTwo){
+String fromdegree (String ans1, String unitChoiceTwo, int precision){
   if(unitChoiceTwo == 'degree')
     return ans1;
   if(unitChoiceTwo == 'radian')
-    return (double.parse(ans1)/57.295779513).toString();
+    return (double.parse(ans1)/57.295779513).toStringAsFixed(precision);
   if(unitChoiceTwo == 'gradian')
-    return (double.parse(ans1)/0.9).toString();
+    return (double.parse(ans1)/0.9).toStringAsFixed(precision);
   if(unitChoiceTwo == 'minute')
-    return (double.parse(ans1)*60).toString();
+    return (double.parse(ans1)*60).toStringAsFixed(precision);
   if(unitChoiceTwo == 'second')
-    return (double.parse(ans1)*3600).toString();
+    return (double.parse(ans1)*3600).toStringAsFixed(precision);
 }
 
 String togram (String unitChoiceOne, String userInput){
@@ -82,19 +190,19 @@ String togram (String unitChoiceOne, String userInput){
     return (double.parse(userInput)*28.3495).toString();
 }
 
-String fromgram (String ans1, String unitChoiceTwo){
+String fromgram (String ans1, String unitChoiceTwo, int precision){
   if(unitChoiceTwo == 'gram')
     return ans1;
   if (unitChoiceTwo == 'tonne')
-    return (double.parse(ans1)/1000000).toString();
+    return (double.parse(ans1)/1000000).toStringAsFixed(precision);
   if (unitChoiceTwo == 'kilogram')
-    return (double.parse(ans1)/1000).toString();
+    return (double.parse(ans1)/1000).toStringAsFixed(precision);
   if (unitChoiceTwo == 'milligram')
-    return (double.parse(ans1)*1000).toString();
+    return (double.parse(ans1)*1000).toStringAsFixed(precision);
   if (unitChoiceTwo == 'pound')
-    return (double.parse(ans1)/453.592).toString();
+    return (double.parse(ans1)/453.592).toStringAsFixed(precision);
   if (unitChoiceTwo == 'ounce')
-    return (double.parse(ans1)/28.3495).toString();
+    return (double.parse(ans1)/28.3495).toStringAsFixed(precision);
 }
 
 String tometer(String unitChoiceOne, String userInput){
@@ -114,21 +222,21 @@ String tometer(String unitChoiceOne, String userInput){
     return (double.parse(userInput)*0.3048).toString();
 }
 
-String frommeter(String ans1, String unitChoiceTwo){
+String frommeter(String ans1, String unitChoiceTwo, int precision){
   if(unitChoiceTwo == 'meter')
     return ans1;
   if (unitChoiceTwo == 'centimeter')
-    return (double.parse(ans1)*100).toString();
+    return (double.parse(ans1)*100).toStringAsFixed(precision);
   if (unitChoiceTwo == 'kilometer')
-    return (double.parse(ans1)/1000).toString();
+    return (double.parse(ans1)/1000).toStringAsFixed(precision);
   if (unitChoiceTwo == 'inch')
-    return (double.parse(ans1)/0.0254).toString();
+    return (double.parse(ans1)/0.0254).toStringAsFixed(precision);
   if (unitChoiceTwo == 'mile')
-    return (double.parse(ans1)/1609.34).toString();
+    return (double.parse(ans1)/1609.34).toStringAsFixed(precision);
   if (unitChoiceTwo == 'millimeter')
-    return (double.parse(ans1)*1000).toString();
+    return (double.parse(ans1)*1000).toStringAsFixed(precision);
   if (unitChoiceTwo == 'feet')
-    return (double.parse(ans1)/0.3048).toString();
+    return (double.parse(ans1)/0.3048).toStringAsFixed(precision);
 }
 
 String temperature (String unitChoiceOne, String unitChoiceTwo, String userInput){
