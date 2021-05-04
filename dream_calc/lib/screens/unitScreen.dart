@@ -22,14 +22,14 @@ class _unitconversionState extends State<unitconversion> {
     'MASS' : ['kilogram','gram','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
   };
-  String unitChoiceOne;
-  String unitChoiceTwo;
+  String unitChoiceOne='';
+  String unitChoiceTwo='';
 
   @override
   Widget build(BuildContext context) {
 
-    unitChoiceOne = unitChoices[unitElementsValue][0];
-    unitChoiceTwo = unitChoices[unitElementsValue][1];
+    unitChoiceOne = unitChoiceOne==''? unitChoices[unitElementsValue][0] : unitChoiceOne;
+    unitChoiceTwo = unitChoiceTwo==''? unitChoices[unitElementsValue][1] : unitChoiceTwo;
 
     return GestureDetector(
       onTap: () {
@@ -68,6 +68,8 @@ class _unitconversionState extends State<unitconversion> {
                   onChanged: (String newValue) {
                     setState(() {
                       unitElementsValue = newValue;
+                      unitChoiceOne = '';
+                      unitChoiceTwo = '';
                     });
                   },
                   items: unitElements.map<DropdownMenuItem<String>>((String value) {
