@@ -18,8 +18,8 @@ class _unitconversionState extends State<unitconversion> {
   String unitElementsValue = "LENGTH";
   List<String> unitElements = ["LENGTH","MASS","TEMPERATURE"];
   Map unitChoices = {
-    'LENGTH' : ['meter','centimeter','kilometer','inch','mile','millimeter','nanometer','micrometer'],
-    'MASS' : ['kilogram','gram','pound', 'ounce'],
+    'LENGTH' : ['meter','centimeter','kilometer','inch','feet','mile','millimeter'],
+    'MASS' : ['kilogram','gram','milligram','tonne','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
   };
   String unitChoiceOne='';
@@ -70,6 +70,8 @@ class _unitconversionState extends State<unitconversion> {
                       unitElementsValue = newValue;
                       unitChoiceOne = '';
                       unitChoiceTwo = '';
+                      userInputOne.text='';
+                      userInputTwo.text='';
                     });
                   },
                   items: unitElements.map<DropdownMenuItem<String>>((String value) {
