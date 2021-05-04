@@ -1,5 +1,4 @@
-import 'package:flutter/rendering.dart';
-import 'package:unit_converter/unit_converter.dart';
+
 String convert(String unitElement, String unitChoiceOne, String unitChoiceTwo, String userInput){
   if(userInput == "")
     return "";
@@ -14,7 +13,32 @@ String convert(String unitElement, String unitChoiceOne, String unitChoiceTwo, S
 
   if(unitElement.toLowerCase() == 'plane angle')
     return fromdegree(todegree(unitChoiceOne, userInput), unitChoiceTwo);
+
+  if(unitElement.toLowerCase() == 'speed')
+    return frommps(tomps(unitChoiceOne, userInput), unitChoiceTwo);
   return '100';
+}
+
+String tomps (String unitChoiceOne, String userInput){
+  if(unitChoiceOne == 'meter per second')
+    return userInput;
+  if(unitChoiceOne == 'kilometer per hour')
+    return (double.parse(userInput)/3.6).toString();
+  if(unitChoiceOne == 'mile per hour')
+    return (double.parse(userInput)/2.237).toString();
+  if(unitChoiceOne == 'foot per second')
+    return (double.parse(userInput)*0.3048).toString();
+}
+
+String frommps (String ans1, String unitChoiceTwo){
+  if(unitChoiceTwo == 'meter per second')
+    return ans1;
+  if(unitChoiceTwo == 'kilometer per hour')
+    return (double.parse(ans1)*3.6).toString();
+  if(unitChoiceTwo == 'mile per hour')
+    return (double.parse(ans1)*2.237).toString();
+  if(unitChoiceTwo == 'foot per second')
+    return (double.parse(ans1)/0.3048).toString();
 }
 
 String todegree(String unitChoiceOne, String userInput){

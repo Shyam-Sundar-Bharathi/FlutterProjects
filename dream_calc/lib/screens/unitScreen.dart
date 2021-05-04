@@ -16,12 +16,13 @@ class _unitconversionState extends State<unitconversion> {
   TextEditingController userInputOne = new TextEditingController();
   TextEditingController userInputTwo = new TextEditingController();
   String unitElementsValue = "LENGTH";
-  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE","PLANE ANGLE"];
+  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE","PLANE ANGLE","SPEED"];
   Map unitChoices = {
     'LENGTH' : ['meter','centimeter','kilometer','inch','feet','mile','millimeter'],
     'MASS' : ['kilogram','gram','milligram','tonne','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
     'PLANE ANGLE' : ['degree','radian','gradian','minute','second'],
+    'SPEED' : ['meter per second', 'kilometer per hour', 'mile per hour', 'foot per second']
   };
   String unitChoiceOne='';
   String unitChoiceTwo='';
@@ -133,6 +134,7 @@ class _unitconversionState extends State<unitconversion> {
                       onChanged: (String newValue) {
                         setState(() {
                           unitChoiceOne = newValue;
+                          userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {
@@ -194,6 +196,7 @@ class _unitconversionState extends State<unitconversion> {
                       onChanged: (String newValue) {
                         setState(() {
                           unitChoiceTwo = newValue;
+                          userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {
