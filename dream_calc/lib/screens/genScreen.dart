@@ -6,7 +6,6 @@ import 'package:dream_calc/services/buttons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:math_expressions/math_expressions.dart';
-
 class genCalc extends StatefulWidget {
   @override
   _genCalcState createState() => _genCalcState();

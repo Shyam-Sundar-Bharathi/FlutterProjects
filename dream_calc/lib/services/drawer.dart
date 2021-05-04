@@ -146,6 +146,26 @@ class _myDrawerState extends State<myDrawer> {
           ),
           SizedBox(height: 10),
           ListTile(
+            onTap: (){
+              Navigator.pushReplacementNamed(context, '/percentage',arguments: {
+                'precision' : precision,
+              });
+            },
+            title: Text(
+              'PERCENTAGE',
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+            tileColor: Colors.blue[800],
+            leading: Icon(
+              Icons.calculate_rounded,
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(height: 10),
+          ListTile(
             onTap: () async {
               result = await Navigator.pushNamed(context, '/settings');
               setState(() {
