@@ -16,11 +16,12 @@ class _unitconversionState extends State<unitconversion> {
   TextEditingController userInputOne = new TextEditingController();
   TextEditingController userInputTwo = new TextEditingController();
   String unitElementsValue = "LENGTH";
-  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE"];
+  List<String> unitElements = ["LENGTH","MASS","TEMPERATURE","PLANE ANGLE"];
   Map unitChoices = {
     'LENGTH' : ['meter','centimeter','kilometer','inch','feet','mile','millimeter'],
     'MASS' : ['kilogram','gram','milligram','tonne','pound', 'ounce'],
     'TEMPERATURE' : ['celcius','kelvin','farenheit'],
+    'PLANE ANGLE' : ['degree','radian','gradian','minute','second'],
   };
   String unitChoiceOne='';
   String unitChoiceTwo='';
