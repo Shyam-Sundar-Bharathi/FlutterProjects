@@ -9,7 +9,7 @@ class centTendCalc extends StatefulWidget {
 
 class _centTendCalcState extends State<centTendCalc> {
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
   };
   var choice = "Answer";
   var result = "0";
@@ -43,10 +43,10 @@ class _centTendCalcState extends State<centTendCalc> {
               children: [
                 TextField(
                   controller: userInput,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                   enableInteractiveSelection: true,
                   inputFormatters: [
-                    FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
+                    FilteringTextInputFormatter(RegExp('[0-9,.]'), allow: true),
                   ],
                   decoration: InputDecoration(
                     labelText: "Enter comma separated numbers",
@@ -110,25 +110,6 @@ class _centTendCalcState extends State<centTendCalc> {
                       },
                       child: Text(
                         "MODE",
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
-                        minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          choice = "RANGE";
-                          result = range(userInput.text, precision);
-                        });
-                      },
-                      child: Text(
-                        "RANGE",
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -201,6 +182,25 @@ class _centTendCalcState extends State<centTendCalc> {
                         ),
                       ),
                     ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                        minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          choice = "RANGE";
+                          result = range(userInput.text, precision);
+                        });
+                      },
+                      child: Text(
+                        "RANGE",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 SizedBox(height: 40),

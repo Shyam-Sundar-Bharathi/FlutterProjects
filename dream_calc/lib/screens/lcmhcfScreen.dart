@@ -43,7 +43,7 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                   keyboardType: TextInputType.number,
                   enableInteractiveSelection: true,
                   inputFormatters: [
-                    FilteringTextInputFormatter(RegExp('[0-9, ]'), allow: true),
+                    FilteringTextInputFormatter(RegExp('[0-9,]'), allow: true),
                   ],
                   decoration: InputDecoration(
                     labelText: "Enter comma separated numbers",
@@ -97,11 +97,19 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                 ),
                 SizedBox(height: 40),
                 Text(
-                  "$choice = $result",
+                  "$choice",
                   style: TextStyle(
                     fontSize: 30,
                   ),
                 ),
+                SizedBox(height: 10),
+                Text(
+                  "$result",
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+
               ],
             ),
           ),

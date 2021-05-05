@@ -6,7 +6,7 @@ class settings extends StatefulWidget {
 }
 
 String dropDownColor = "BLUE";
-int sliderValue =  8;
+int sliderValue =  4;
 String alertMessage = "";
 class _settingsState extends State<settings> {
   @override

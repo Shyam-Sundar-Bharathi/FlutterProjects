@@ -11,7 +11,7 @@ class unitconversion extends StatefulWidget {
 class _unitconversionState extends State<unitconversion> {
 
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
   };
 
   bool inFocusOne = false;
@@ -113,7 +113,7 @@ class _unitconversionState extends State<unitconversion> {
                         keyboardType: TextInputType.number,
                         enableInteractiveSelection: true,
                         inputFormatters: [
-                          FilteringTextInputFormatter(RegExp('[0-9. ]'), allow: true),
+                          FilteringTextInputFormatter(RegExp('[0-9.]'), allow: true),
                         ],
                          decoration: InputDecoration(
                            border:OutlineInputBorder(
@@ -131,15 +131,15 @@ class _unitconversionState extends State<unitconversion> {
                     DropdownButton<String>(
                       value: unitChoiceOne,
                       icon: Icon(Icons.arrow_drop_down),
-                      iconSize: 72,
+                      iconSize: 50,
                       elevation: 16,
                       style: const TextStyle(
-                        color: Colors.deepPurple,
+                        color: Colors.black,
                         fontSize: 20,
                       ),
                       underline: Container(
                         height: 2,
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.black,
                       ),
                       onChanged: (String newValue) {
                         setState(() {
@@ -153,7 +153,8 @@ class _unitconversionState extends State<unitconversion> {
                           child: Text(value),
                         );
                       }).toList(),
-                    )],
+                    )
+                  ],
                 ),
                 SizedBox(height: 30.0,),
                 Row(
@@ -168,6 +169,7 @@ class _unitconversionState extends State<unitconversion> {
                             userInputOne.text = answer;
                           });
                         },
+                        textAlign: TextAlign.right,
                         onChanged: (text){
                             userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
                             },
@@ -193,15 +195,15 @@ class _unitconversionState extends State<unitconversion> {
                     DropdownButton<String>(
                       value: unitChoiceTwo,
                       icon: Icon(Icons.arrow_drop_down),
-                      iconSize: 72,
+                      iconSize: 50,
                       elevation: 16,
                       style: const TextStyle(
-                        color: Colors.deepPurple,
+                        color: Colors.black,
                         fontSize: 20,
                       ),
                       underline: Container(
                         height: 2,
-                        color: Colors.deepPurpleAccent,
+                        color: Colors.black,
                       ),
                       onChanged: (String newValue) {
                         setState(() {

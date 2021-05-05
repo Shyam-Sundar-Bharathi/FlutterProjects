@@ -11,7 +11,7 @@ class areaCalc extends StatefulWidget {
 class _areaCalcState extends State<areaCalc> {
 
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
   };
   var choice = "Answer";
   var result = "0";
@@ -57,7 +57,7 @@ class _areaCalcState extends State<areaCalc> {
                   keyboardType: TextInputType.number,
                   enableInteractiveSelection: true,
                   inputFormatters: [
-                    FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
+                    FilteringTextInputFormatter(RegExp('[0-9,.]'), allow: true),
                   ],
                   decoration: InputDecoration(
                     labelText: "${disp[dropDownValue]}",
@@ -113,7 +113,14 @@ class _areaCalcState extends State<areaCalc> {
                 SizedBox(height: 40),
 
                 Text(
-                  "AREA OF $dropDownValue = $result",
+                  "AREA OF $dropDownValue",
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  result,
                   style: TextStyle(
                     fontSize: 25,
                   ),

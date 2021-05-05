@@ -1,3 +1,4 @@
+import 'package:dream_calc/screens/currencyScreen.dart';
 import 'package:dream_calc/screens/unitScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/screens/genScreen.dart';
@@ -19,7 +20,8 @@ void main() {
       '/volume' : (context) => volumeCalc(),
       '/settings' : (context) => settings(),
       '/unitConversion' : (context) => unitconversion(),
-      '/percentage' : (context) => percentCalc()
+      '/percentage' : (context) => percentCalc(),
+      '/currency' : (context) => currency()
     },
   ));
 }

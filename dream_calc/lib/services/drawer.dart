@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dream_calc/services/currencyConversion.dart';
 class myDrawer extends StatefulWidget {
   @override
   _myDrawerState createState() => _myDrawerState();
@@ -14,16 +16,51 @@ class _myDrawerState extends State<myDrawer> {
         padding: EdgeInsets.all(0),
         children: [
           DrawerHeader(
+            padding: EdgeInsets.fromLTRB(0,10,0,0),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.black,
             ),
-            child: Text(
-              "MENU",
-              style: TextStyle(
-                fontSize: 40.0,
-                color: Colors.white,
-              ),
-            ),
+            child: ListView(
+              padding: EdgeInsets.all(0),
+              children: [
+                ListTile(
+                  onTap: () async {
+                    result = await Navigator.pushNamed(context, '/settings');
+                    setState(() {
+                      precision = result['precision'];
+                    });
+                  },
+                  title: Text(
+                    "SETTINGS",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  tileColor: Colors.black87,
+                  leading: Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  ),
+                SizedBox(height: 10,),
+                ListTile(
+                  onTap: (){},
+                  title: Text(
+                    "USAGE TIPS",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  tileColor: Colors.black87,
+                  leading: Icon(
+                    Icons.check,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            )
           ),
           ListTile(
             onTap: (){
@@ -35,13 +72,13 @@ class _myDrawerState extends State<myDrawer> {
               "GENERAL CALCULATOR",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox( height: 10),
@@ -55,13 +92,13 @@ class _myDrawerState extends State<myDrawer> {
               "LCM GCD CALCULATOR",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox( height: 10),
@@ -75,13 +112,13 @@ class _myDrawerState extends State<myDrawer> {
               "CENTRAL TENDENCIES CALCULATOR",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox( height: 10),
@@ -95,13 +132,13 @@ class _myDrawerState extends State<myDrawer> {
               "AREA OF 2D SHAPES",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox( height: 10),
@@ -115,13 +152,13 @@ class _myDrawerState extends State<myDrawer> {
               "VOLUME OF 3D SHAPES",
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox( height: 10),
@@ -135,13 +172,13 @@ class _myDrawerState extends State<myDrawer> {
               'UNIT CONVERSION',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox(height: 10),
@@ -155,34 +192,31 @@ class _myDrawerState extends State<myDrawer> {
               'PERCENTAGE',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
               Icons.calculate_rounded,
-              color: Colors.white,
+              color: Colors.black87,
             ),
           ),
           SizedBox(height: 10),
           ListTile(
-            onTap: () async {
-              result = await Navigator.pushNamed(context, '/settings');
-              setState(() {
-                precision = result['precision'];
-              });
+            onTap: (){
+              Navigator.pushReplacementNamed(context, '/currency');
             },
             title: Text(
-              "SETTINGS",
+              'CURRENCY CONVERSION',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
-            tileColor: Colors.blue[800],
+            tileColor: Colors.white12,
             leading: Icon(
-              Icons.settings,
-              color: Colors.white,
+              Icons.attach_money_sharp,
+              color: Colors.black87,
             ),
           ),
         ],

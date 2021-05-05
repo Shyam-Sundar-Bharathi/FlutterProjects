@@ -6,6 +6,12 @@ import 'package:dream_calc/services/buttons.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:math_expressions/math_expressions.dart';
+
+extension Ex on double {
+  String toStringAsFixedNoZero(int n) =>
+      double.parse(this.toStringAsFixed(n)).toString();
+}
+
 class genCalc extends StatefulWidget {
   @override
   _genCalcState createState() => _genCalcState();
@@ -14,7 +20,7 @@ class genCalc extends StatefulWidget {
 class _genCalcState extends State<genCalc> {
 
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
     'colourTheme' : "BLUE",
   };
   TextEditingController userInput = new TextEditingController();
@@ -42,6 +48,12 @@ class _genCalcState extends State<genCalc> {
     '=',
     '+',
   ];
+  int tappedIndex = -1;
+  void tapped(int index) async {
+    setState(() => tappedIndex = index);
+    await Future.delayed(Duration(milliseconds: 200));
+    setState(() => tappedIndex = -1);
+  }
 
   bool isOperator(String x) {
     if (x == '/' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' ) {
@@ -81,15 +93,23 @@ class _genCalcState extends State<genCalc> {
         return;
 
     //
-    if(isOperator(userInput.text[userInput.text.length-1]))
+    else if(isOperator(userInput.text[userInput.text.length-1]))
       if(operator=='-')
         userInput.text+= '(-' ;
       else
-        setState(() {
-          userInput.text = userInput.text.substring(0,userInput.text.length-1) + operator;
-        });
+        if(userInput.text[userInput.text.length-2]=='(')
+          return;
+        else
+          setState(() {
+            userInput.text = userInput.text.substring(0,userInput.text.length-1) + operator;
+          });
 
-    //
+    else if(userInput.text[userInput.text.length-1]=='(')
+      if(operator == '-')
+        userInput.text += '-';
+      else
+        return;
+
     else
       insertText(operator);
   }
@@ -178,26 +198,38 @@ class _genCalcState extends State<genCalc> {
       ContextModel cm = ContextModel();
       double eval = exp.evaluate(EvaluationType.REAL, cm);
       setState(() {
-        answer = eval.toString();
+        answer = eval.toStringAsFixedNoZero(precision);
       });
       //print("END TRY");
     }
     on FormatException {
-      finaluserinput = finaluserinput.replaceAll('(', '');
-      finaluserinput = finaluserinput.replaceAll(')', '');
-      if(finaluserinput.length == 0){
+      try{
+        int open = '('.allMatches(userInput.text).length;
+        int close = ')'.allMatches(userInput.text).length;
+        if(open == close + 1)
+          finaluserinput += ')';
+        else{
+          finaluserinput = finaluserinput.replaceAll('(', '');
+          finaluserinput = finaluserinput.replaceAll(')', '');
+        }
+        if(finaluserinput.length == 0){
+          setState(() {
+            answer='';
+          });
+          return;
+        }
+        Expression exp = p.parse(finaluserinput);
+        ContextModel cm = ContextModel();
+        double eval = exp.evaluate(EvaluationType.REAL, cm);
         setState(() {
-          answer='';
+          answer = eval.toStringAsFixedNoZero(precision);
         });
-        return;
       }
-      //print(finaluserinput);
-      Expression exp = p.parse(finaluserinput);
-      ContextModel cm = ContextModel();
-      double eval = exp.evaluate(EvaluationType.REAL, cm);
-      setState(() {
-        answer = eval.toString();
-      });
+      on Exception{
+        setState(() {
+          answer == 'The expression is incorrect';
+        });
+      }
     }
   }
 
@@ -208,8 +240,8 @@ class _genCalcState extends State<genCalc> {
     precision = data['precision'];
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.white70,
       appBar: AppBar(
         title: Text(
           "General Caculator",
@@ -251,6 +283,8 @@ class _genCalcState extends State<genCalc> {
                       alignment: Alignment.centerRight,
                       child: Text(
                         answer,
+                        overflow: TextOverflow.clip,
+                        softWrap: false,
                         style: TextStyle(
                           fontSize: 30,
                           color: Colors.black,
@@ -263,8 +297,9 @@ class _genCalcState extends State<genCalc> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex:3,
               child: Container(
+                color: Colors.black87,
                 child: GridView.builder(
                   itemCount: buttons.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -273,8 +308,11 @@ class _genCalcState extends State<genCalc> {
                   itemBuilder: (BuildContext context, int index){
                     if(index == 0){
                       return MyButton(
-                        buttontapped: (){},
-                        color: Colors.green[200],
+                        buttontapped: (){
+                          print('tapped');
+                          tapped(index);
+                        },
+                        color: tappedIndex == index? Colors.green[700] : Colors.green[300],
                         textColor: Colors.black,
                         buttonText: buttons[index],
                       );
@@ -283,10 +321,12 @@ class _genCalcState extends State<genCalc> {
                     if(index == 1){
                       return MyButton(
                         buttontapped: (){
+                          tapped(index);
                           parenthesis();
                           evaluate(userInput.text);
                         },
-                        color: Colors.blueAccent,
+
+                        color: tappedIndex == index? Colors.blue : Colors.blueAccent,
                         textColor: Colors.black,
                         buttonText: buttons[index],
                       );
@@ -295,16 +335,18 @@ class _genCalcState extends State<genCalc> {
                      if(index == 3){
                       return MyButton(
                         buttontapped: (){
+                          tapped(index);
                           backSpace();
                           },
                         buttonlongpressed: (){
+                          tapped(index);
                           setState(() {
                             userInput.text='';
                             answer='0';
                           });
                         },
                         buttonText: buttons[index],
-                        color: Colors.green[100],
+                        color: tappedIndex == index ? Colors.green[300] : Colors.green[100],
                         textColor: Colors.black,
                         fontSize: 20.0,
                       );
@@ -313,13 +355,21 @@ class _genCalcState extends State<genCalc> {
                     else if (index == 18) {
                       return MyButton(
                         buttontapped: () {
-                          setState(() {
-                            userInput.text = answer;
-                            answer="";
-                          });
+                          tapped(index);
+                          if((answer == '' || answer == '0') && userInput.text != '')
+                            setState(() {
+                              answer = "The expression is incorrect";
+                            });
+                          else if (answer == 'The expression is incorrect')
+                            null;
+                          else
+                            setState(() {
+                              userInput.text = answer;
+                              answer="";
+                            });
                         },
                         buttonText: buttons[index],
-                        color: Colors.lightGreen[700],
+                        color: tappedIndex == index? Colors.green : Colors.lightGreen[700],
                         textColor: Colors.white,
                       );
                     }
@@ -327,6 +377,7 @@ class _genCalcState extends State<genCalc> {
                     else{
                       return MyButton(
                         buttontapped: () {
+                          tapped(index);
                           if(isOperator(buttons[index]))
                             insertOperator(buttons[index]);
                           else
@@ -337,8 +388,8 @@ class _genCalcState extends State<genCalc> {
                         },
                         buttonText: buttons[index],
                         color: isOperator(buttons[index])
-                            ? Colors.blueAccent
-                            : Colors.grey[200],
+                            ? tappedIndex == index? Colors.blue : Colors.blueAccent
+                            : tappedIndex == index? Colors.grey[400] : Colors.grey[200],
                         textColor: isOperator(buttons[index])
                             ? Colors.white
                             : Colors.black,

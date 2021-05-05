@@ -11,7 +11,7 @@ class volumeCalc extends StatefulWidget {
 class _volumeCalcState extends State<volumeCalc> {
 
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
   };
   var choice = "Answer";
   var result = "0";
@@ -56,7 +56,7 @@ class _volumeCalcState extends State<volumeCalc> {
                   keyboardType: TextInputType.number,
                   enableInteractiveSelection: true,
                   inputFormatters: [
-                    FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
+                    FilteringTextInputFormatter(RegExp('[0-9,.]'), allow: true),
                   ],
                   decoration: InputDecoration(
                     labelText: "${disp[dropDownValue]}",
@@ -112,7 +112,14 @@ class _volumeCalcState extends State<volumeCalc> {
                 SizedBox(height: 40),
 
                 Text(
-                  "VOLUME OF $dropDownValue = $result",
+                  "VOLUME OF $dropDownValue",
+                  style: TextStyle(
+                    fontSize: 25,
+                  ),
+                ),
+                SizedBox(height: 10,),
+                Text(
+                  result,
                   style: TextStyle(
                     fontSize: 25,
                   ),

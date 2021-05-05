@@ -1,5 +1,10 @@
 import 'dart:math';
 
+extension Ex on double {
+  String toStringAsFixedNoZero(int n) =>
+      double.parse(this.toStringAsFixed(n)).toString();
+}
+
 String mean (String userInput, int precision) {
   var sArray = userInput.split(",");
   var iArray = [];
@@ -9,7 +14,7 @@ String mean (String userInput, int precision) {
     iArray.add(double.parse(sArray[iter]));
   var sum = iArray.fold(0, (a, b) => a + b);
   var mean = sum/length;
-  return mean.toStringAsFixed(precision);
+  return mean.toStringAsFixedNoZero(precision);
 }
 
 String median (String userInput, int precision) {
@@ -27,7 +32,7 @@ String median (String userInput, int precision) {
       return median.toString();
     }
   median = (((iArray[((length-1)/2).floor()] + iArray[((length-1)/2).ceil()]))/2);
-  return median.toStringAsFixed(precision);
+  return median.toStringAsFixedNoZero(precision);
 }
 
 String mode (String userInput, int precision) {
@@ -57,7 +62,7 @@ String mode (String userInput, int precision) {
     if(value == modalValue)
       mode=key;
   });
-  return mode.toStringAsFixed(precision);
+  return mode.toStringAsFixedNoZero(precision);
 }
 
 String range (String userInput, int precision) {
@@ -68,7 +73,7 @@ String range (String userInput, int precision) {
   for(iter=0; iter<length; iter++)
     iArray.add(double.parse(sArray[iter]));
   iArray.sort();
-  return (iArray[length-1] - iArray[0]).toStringAsPrecicion(precision);
+  return (iArray[length-1] - iArray[0]).toString();
 
 }
 
@@ -79,12 +84,10 @@ String variance (String userInput, int precision){
   var iter = 0;
   var result = 0.0;
   var avg = double.parse(mean(userInput, precision));
-  // for(iter=0; iter<length; iter++)
-  //   iArray.add(double.parse(sArray[iter]));
   for(iter=0; iter<length; iter++)
     result += pow(avg - double.parse(sArray[iter]), 2);
   result /= length;
-  return result.toStringAsFixed(precision);
+  return result.toStringAsFixedNoZero(precision);
 
 }
 
@@ -94,5 +97,5 @@ String stddev (String userInput, int precision){
 }
 
 String cv (String userInput, int precision){
-  return (double.parse(stddev(userInput, 10))/double.parse(mean(userInput, 10))).toStringAsFixed(precision);
+  return (double.parse(stddev(userInput, 10))/double.parse(mean(userInput, 10))).toStringAsFixedNoZero(precision);
 }

@@ -13,7 +13,7 @@ class percentCalc extends StatefulWidget {
 class _percentCalcState extends State<percentCalc> {
 
   Map data = {
-    'precision' : 8,
+    'precision' : 4,
   };
   TextEditingController userInputOne = new TextEditingController();
   TextEditingController userInputTwo = new TextEditingController();
@@ -98,7 +98,7 @@ class _percentCalcState extends State<percentCalc> {
                         keyboardType: TextInputType.number,
                         enableInteractiveSelection: true,
                         inputFormatters: [
-                          FilteringTextInputFormatter(RegExp('[0-9,. ]'), allow: true),
+                          FilteringTextInputFormatter(RegExp('[0-9.]'), allow: true),
                         ],
                         decoration: InputDecoration(
                           border:OutlineInputBorder(
@@ -132,6 +132,7 @@ class _percentCalcState extends State<percentCalc> {
                   child: Center(
                     child: Text(
                       answer1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
