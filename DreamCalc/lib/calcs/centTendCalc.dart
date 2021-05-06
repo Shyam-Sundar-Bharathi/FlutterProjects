@@ -9,6 +9,8 @@ String mean (String userInput, int precision) {
   if(userInput == '')
     return '0';
   var sArray = userInput.split(",");
+  if(sArray.length == 1)
+    return double.parse(sArray[0]).toStringAsFixedNoZero(precision);
   var iArray = [];
   var length = sArray.length;
   var iter = 0;

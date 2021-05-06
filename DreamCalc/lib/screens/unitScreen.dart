@@ -1,4 +1,5 @@
 import 'package:dream_calc/services/drawer.dart';
+import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/unitCalc.dart';
@@ -71,12 +72,12 @@ class _unitconversionState extends State<unitconversion> {
                   iconSize: 72,
                   elevation: 16,
                   style: const TextStyle(
-                    color: Colors.deepPurple,
+                    color: Colors.black,
                     fontSize: 20,
                   ),
                   underline: Container(
                     height: 2,
-                    color: Colors.deepPurpleAccent,
+                    color: Colors.black,
                   ),
                   onChanged: (String newValue) {
                     setState(() {
@@ -107,8 +108,9 @@ class _unitconversionState extends State<unitconversion> {
                             userInputTwo.text=answer;
                           });
                         },
+                        textAlign: TextAlign.right,
                         onChanged: (text){
-                            userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
+                            userInputTwo.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision)));
                             },
                         controller: userInputOne,
                         keyboardType: TextInputType.number,

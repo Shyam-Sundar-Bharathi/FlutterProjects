@@ -22,7 +22,6 @@ class _currencyState extends State<currency> {
   String answer = "";
 
   void intialGet() async {
-    print('init $exchangeRate');
     double exchangeRateInitial = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
     setState(() {
       exchangeRate=exchangeRateInitial;
@@ -88,41 +87,42 @@ class _currencyState extends State<currency> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       DropdownButton<String>(
-                        value: dropDownValueFrom,
-                        //isExpanded: false,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 50,
-                        elevation: 16,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        ),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.black,
-                        ),
-                        onChanged: (String newValue) async {
-                          setState(() {
-                            if(newValue == dropDownValueTo){
-                              dropDownValueTo = dropDownValueFrom;
-                            }
-                            dropDownValueFrom = newValue;
-                            exchangeRate = null;
-                          });
-                          exchangeRate = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
-                          setState(() {
-                            answer = currencyCalc(userInput.text, exchangeRate);
-                          });
-                        },
-                        items: currencies.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
+                            value: dropDownValueFrom,
+                            //isExpanded: false,
+                            icon: Icon(Icons.arrow_drop_down),
+                            iconSize: 50,
+                            elevation: 16,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                            underline: Container(
+                              height: 2,
+                              color: Colors.black,
+                            ),
+                            onChanged: (String newValue) async {
+                              setState(() {
+                                if(newValue == dropDownValueTo){
+                                  dropDownValueTo = dropDownValueFrom;
+                                }
+                                dropDownValueFrom = newValue;
+                                exchangeRate = null;
+                              });
+                              exchangeRate = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
+                              setState(() {
+                                answer = currencyCalc(userInput.text,exchangeRate);
+                              });
+                            },
+                            items: currencies.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
                       SizedBox(width: 20,),
                       Expanded(
+                        flex: 1,
                         child: TextField(
                           textAlign: TextAlign.end,
                           controller: userInput,

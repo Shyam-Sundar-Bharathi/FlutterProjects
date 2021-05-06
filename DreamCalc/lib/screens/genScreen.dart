@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/services/drawer.dart';
 import 'package:dream_calc/services/buttons.dart';
@@ -198,7 +199,7 @@ class _genCalcState extends State<genCalc> {
       ContextModel cm = ContextModel();
       double eval = exp.evaluate(EvaluationType.REAL, cm);
       setState(() {
-        answer = eval.toStringAsFixedNoZero(precision);
+        answer = eval.toString();
       });
       //print("END TRY");
     }
@@ -222,12 +223,12 @@ class _genCalcState extends State<genCalc> {
         ContextModel cm = ContextModel();
         double eval = exp.evaluate(EvaluationType.REAL, cm);
         setState(() {
-          answer = eval.toStringAsFixedNoZero(precision);
+          answer = eval.toString();
         });
       }
       on Exception{
         setState(() {
-          answer == 'The expression is incorrect';
+          answer == 'Incorrect Expression';
         });
       }
     }
@@ -238,9 +239,9 @@ class _genCalcState extends State<genCalc> {
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
     precision = data['precision'];
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    //SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      //resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white70,
       appBar: AppBar(
         title: Text(
@@ -257,6 +258,7 @@ class _genCalcState extends State<genCalc> {
       body: Column(
           children: [
             Expanded(
+              flex: 45,
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -282,7 +284,7 @@ class _genCalcState extends State<genCalc> {
                       padding: EdgeInsets.all(15),
                       alignment: Alignment.centerRight,
                       child: Text(
-                        answer,
+                        answer == ''? answer : formatNumber(double.parse(answer)).toString(),
                         overflow: TextOverflow.clip,
                         softWrap: false,
                         style: TextStyle(
@@ -297,7 +299,7 @@ class _genCalcState extends State<genCalc> {
               ),
             ),
             Expanded(
-              flex:3,
+              flex:100,
               child: Container(
                 color: Colors.black87,
                 child: GridView.builder(
@@ -358,9 +360,9 @@ class _genCalcState extends State<genCalc> {
                           tapped(index);
                           if((answer == '' || answer == '0') && userInput.text != '')
                             setState(() {
-                              answer = "The expression is incorrect";
+                              answer = "Incorrect Expression";
                             });
-                          else if (answer == 'The expression is incorrect')
+                          else if (answer == 'Incorrect Expression')
                             null;
                           else
                             setState(() {
