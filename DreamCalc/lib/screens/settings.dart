@@ -26,7 +26,8 @@ class _settingsState extends State<settings> {
               color: Colors.white,
             ),
           ),
-        )
+        ),
+        backgroundColor: Colors.black,
       ),
       body: SingleChildScrollView(
         child: Container(

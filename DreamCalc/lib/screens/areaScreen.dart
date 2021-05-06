@@ -44,7 +44,7 @@ class _areaCalcState extends State<areaCalc> {
               color: Colors.white,
             ),
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.black,
         ),
         drawer: myDrawer(),
         body: SingleChildScrollView(

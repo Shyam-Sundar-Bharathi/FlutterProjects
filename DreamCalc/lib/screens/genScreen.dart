@@ -251,7 +251,7 @@ class _genCalcState extends State<genCalc> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.black,
       ),
       drawer: myDrawer(),
       body: Column(

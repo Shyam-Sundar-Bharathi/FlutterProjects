@@ -20,28 +20,31 @@ class _currencyState extends State<currency> {
   String answer = "";
 
   void intialGet() async {
-    setState(() async {
-      exchangeRate = await getExchangeRate(codes[dropDownValueFrom], codes[dropDownValueTo]);
+    print('init $exchangeRate');
+    double exchangeRateInitial = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
+    setState(() {
+      exchangeRate=exchangeRateInitial;
     });
   }
 
   void initState() {
     intialGet();
+    super.initState();
   }
 
   Map codes = {
-    'US Dollar' : 'USD',
-    'Indian Rupee' : 'INR',
-    'Japanese Yen' : 'JPY',
-    'European Euro' : 'EUR',
-    'UAE Dirham' : 'AED',
-    'Singapore Dollar' : 'SGD',
-    'Australian Dollar' : 'AUD',
-    'Bahraini Dinar' : 'BHD',
-    'Bangladeshi Taka' : 'BDT',
-    'British Pound' : 'GBP',
-    'Canadian Dollar' : 'CAD',
-    'Hong Kong Dollar' : 'HKD'
+    'US Dollar' : ['USD','\$'],
+    'Indian Rupee' : ['INR','₹'],
+    'Bangladeshi Taka' : ['BDT','৳'],
+    'Japanese Yen' : ['JPY','¥'],
+    'European Euro' : ['EUR','€'],
+    'UAE Dirham' : ['AED','د.إ'],
+    'Singapore Dollar' : ['SGD','\$'],
+    'Australian Dollar' : ['AUD','\$'],
+    'British Pound' : ['GBP','£'],
+    'Canadian Dollar' : ['CAD','\$'],
+    'Hong Kong Dollar' : ['HKD','\$'],
+    'Bahraini Dinar' : ['BHD','\$'],
   };
 
   @override
@@ -52,6 +55,7 @@ class _currencyState extends State<currency> {
       },
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           title: Text(
             'Currency Conversion',
             style: TextStyle(
@@ -97,10 +101,13 @@ class _currencyState extends State<currency> {
                         ),
                         onChanged: (String newValue) async {
                           setState(() {
+                            if(newValue == dropDownValueTo){
+                              dropDownValueTo = dropDownValueFrom;
+                            }
                             dropDownValueFrom = newValue;
-
+                            exchangeRate = null;
                           });
-                          exchangeRate = await getExchangeRate(codes[dropDownValueFrom], codes[dropDownValueTo]);
+                          exchangeRate = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
                           setState(() {
                             answer = currencyCalc(userInput.text, exchangeRate);
                           });
@@ -125,7 +132,7 @@ class _currencyState extends State<currency> {
                             });
                           },
                           inputFormatters: [
-                            FilteringTextInputFormatter(RegExp('[0-9. ]'), allow: true),
+                            FilteringTextInputFormatter(RegExp('[0-9.,]'), allow: true),
                           ],
                           decoration: InputDecoration(
                             border:OutlineInputBorder(
@@ -167,9 +174,13 @@ class _currencyState extends State<currency> {
                         ),
                         onChanged: (String newValue) async {
                           setState(() {
+                            if(newValue == dropDownValueFrom){
+                              dropDownValueFrom = dropDownValueTo;
+                            }
                             dropDownValueTo = newValue;
+                            exchangeRate = null;
                           });
-                          exchangeRate = await getExchangeRate(codes[dropDownValueFrom], codes[dropDownValueTo]);
+                          exchangeRate = await getExchangeRate(codes[dropDownValueFrom][0], codes[dropDownValueTo][0]);
                           setState(() {
                             answer = currencyCalc(userInput.text, exchangeRate);
                           });
@@ -191,9 +202,9 @@ class _currencyState extends State<currency> {
                           ),
                           child: Center(
                             child: Text(
-                              answer,
+                              codes[dropDownValueTo][1]+ ' ' + answer,
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -206,7 +217,7 @@ class _currencyState extends State<currency> {
                   SizedBox(height: 50,),
                   Center(
                     child: Text(
-                      'The exchange rate is ${exchangeRate}',
+                      exchangeRate == null? 'The exchange rate is loading' : '1 ${codes[dropDownValueFrom][0]} = ${exchangeRate} ${codes[dropDownValueTo][0]} ',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

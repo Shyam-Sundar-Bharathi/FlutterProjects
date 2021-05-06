@@ -34,6 +34,7 @@ class _percentCalcState extends State<percentCalc> {
     },
     child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           title: Text(
             'PERCENTAGE CALCULATOR',
             style: TextStyle(
