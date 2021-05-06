@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:io' show Platform;
 import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/services/drawer.dart';
@@ -228,7 +228,7 @@ class _genCalcState extends State<genCalc> {
       }
       on Exception{
         setState(() {
-          answer == 'Incorrect Expression';
+          answer = 'Incorrect Expression';
         });
       }
     }
@@ -239,7 +239,7 @@ class _genCalcState extends State<genCalc> {
   Widget build(BuildContext context) {
     data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
     precision = data['precision'];
-    //SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       //resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white70,
@@ -258,7 +258,7 @@ class _genCalcState extends State<genCalc> {
       body: Column(
           children: [
             Expanded(
-              flex: 45,
+              flex: Platform.isAndroid ? 31 : 48,
               child: Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
