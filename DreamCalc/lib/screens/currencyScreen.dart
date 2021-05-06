@@ -4,6 +4,8 @@ import 'package:dream_calc/services/currencyConversion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:intl/intl.dart';
 class currency extends StatefulWidget {
   const currency({Key key}) : super(key: key);
   @override

@@ -90,12 +90,12 @@ class _volumeCalcState extends State<volumeCalc> {
                   iconSize: 72,
                   elevation: 16,
                   style: const TextStyle(
-                    color: Colors.deepPurple,
+                    color: Colors.black,
                     fontSize: 20,
                   ),
                   underline: Container(
                     height: 2,
-                    color: Colors.deepPurpleAccent,
+                    color: Colors.black,
                   ),
                   onChanged: (String newValue) {
                     setState(() {

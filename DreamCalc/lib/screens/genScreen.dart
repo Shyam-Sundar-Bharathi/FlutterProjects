@@ -342,11 +342,11 @@ class _genCalcState extends State<genCalc> {
                           tapped(index);
                           setState(() {
                             userInput.text='';
-                            answer='0';
+                            answer='';
                           });
                         },
                         buttonText: buttons[index],
-                        color: tappedIndex == index ? Colors.green[300] : Colors.green[100],
+                        color: tappedIndex == index ? Colors.red[500] : Colors.red[300],
                         textColor: Colors.black,
                         fontSize: 20.0,
                       );
@@ -369,7 +369,7 @@ class _genCalcState extends State<genCalc> {
                             });
                         },
                         buttonText: buttons[index],
-                        color: tappedIndex == index? Colors.green : Colors.lightGreen[700],
+                        color: tappedIndex == index? Colors.green : Colors.greenAccent[400],
                         textColor: Colors.white,
                       );
                     }

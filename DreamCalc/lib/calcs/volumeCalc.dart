@@ -6,6 +6,8 @@ extension Ex on double {
 }
 
 String volume (String userInput, String dropDownValue, int precision) {
+  if(userInput == '')
+    return '0';
   const pi = 3.141592653589793238;
   if(dropDownValue == "CUBE"){
     var side = double.parse(userInput);

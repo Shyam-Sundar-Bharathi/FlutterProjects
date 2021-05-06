@@ -1,4 +1,6 @@
 String lcm (String userInput) {
+  if(userInput == "")
+    return '0';
   var sArray = userInput.split(",");
   var length = sArray.length;
   var iArray = [];
@@ -6,9 +8,7 @@ String lcm (String userInput) {
   var lcm_found = false;
   int iter= 0;
   for(iter=0; iter<sArray.length; iter++)
-      {
         iArray.add(int.parse(sArray[iter]));
-      }
   iArray.sort();
   lcm = iArray[length-1];
   iter = 0;
@@ -31,6 +31,8 @@ String lcm (String userInput) {
 }
 
 String hcf (String userInput) {
+  if(userInput == "")
+    return '0';
   var sArray = userInput.split(",");
   var length = sArray.length;
   var iArray = [];

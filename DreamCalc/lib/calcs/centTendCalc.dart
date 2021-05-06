@@ -6,6 +6,8 @@ extension Ex on double {
 }
 
 String mean (String userInput, int precision) {
+  if(userInput == '')
+    return '0';
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -18,6 +20,8 @@ String mean (String userInput, int precision) {
 }
 
 String median (String userInput, int precision) {
+  if(userInput == '')
+    return '0';
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -36,6 +40,8 @@ String median (String userInput, int precision) {
 }
 
 String mode (String userInput, int precision) {
+  if(userInput == '')
+    return '0';
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -66,6 +72,8 @@ String mode (String userInput, int precision) {
 }
 
 String range (String userInput, int precision) {
+  if(userInput == '')
+    return '0';
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -78,8 +86,9 @@ String range (String userInput, int precision) {
 }
 
 String variance (String userInput, int precision){
+  if(userInput == '')
+    return '0';
   var sArray = userInput.split(",");
-  //var iArray = [];
   var length = sArray.length;
   var iter = 0;
   var result = 0.0;
@@ -92,10 +101,14 @@ String variance (String userInput, int precision){
 }
 
 String stddev (String userInput, int precision){
+  if(userInput == '')
+    return '0';
   return (pow(double.parse(variance(userInput, 10)),0.5)).toStringAsFixed(precision);
 
 }
 
 String cv (String userInput, int precision){
+  if(userInput == '')
+    return '0';
   return (double.parse(stddev(userInput, 10))/double.parse(mean(userInput, 10))).toStringAsFixedNoZero(precision);
 }

@@ -6,6 +6,8 @@ extension Ex on double {
 }
 
 String area (String userInput, String dropDownValue, int precision) {
+  if(userInput == '')
+    return '0';
   if(dropDownValue == "SQUARE"){
     var side = double.parse(userInput);
     return (side*side).toStringAsFixedNoZero(precision);
