@@ -284,7 +284,7 @@ class _genCalcState extends State<genCalc> {
                       padding: EdgeInsets.all(15),
                       alignment: Alignment.centerRight,
                       child: Text(
-                        answer == ''? answer : formatNumber(double.parse(answer)).toString(),
+                        answer == '' || answer == 'Incorrect Expression'? answer : formatNumber(double.parse(answer)).toString(),
                         overflow: TextOverflow.clip,
                         softWrap: false,
                         style: TextStyle(

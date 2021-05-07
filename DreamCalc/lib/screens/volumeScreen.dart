@@ -1,3 +1,4 @@
+import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/volumeCalc.dart';
@@ -119,7 +120,7 @@ class _volumeCalcState extends State<volumeCalc> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  result,
+                  formatNumber(double.parse(result)),
                   style: TextStyle(
                     fontSize: 25,
                   ),

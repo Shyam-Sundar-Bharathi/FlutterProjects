@@ -1,3 +1,4 @@
+import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/lcmhcfCalc.dart';
@@ -104,7 +105,7 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  "$result",
+                  formatNumber(double.parse(result)),
                   style: TextStyle(
                     fontSize: 30,
                   ),

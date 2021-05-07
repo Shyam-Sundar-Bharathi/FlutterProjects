@@ -5,25 +5,49 @@ extension Ex on double {
       double.parse(this.toStringAsFixed(n)).toString();
 }
 
-String mean (String userInput, int precision) {
+String centTend(String userInput, int precision, int choice){
   if(userInput == '')
     return '0';
+  if(userInput.endsWith(','))
+    userInput = userInput.substring(0,userInput.length-1);
+  double result;
+    switch(choice){
+      case 0: result = mean(userInput);
+      break;
+      case 1: result = median(userInput);
+      break;
+      case 2: result = mode(userInput);
+      break;
+      case 3: result = stddev(userInput);
+      break;
+      case 4: result = variance(userInput);
+      break;
+      case 5: result = cv(userInput);
+      break;
+      case 6: result = range(userInput);
+      break;
+    }
+  return result.toStringAsPrecision(precision);
+}
+
+
+double mean (String userInput) {
+  if(userInput.endsWith(','))
+    userInput = userInput.substring(0,userInput.length-1);
   var sArray = userInput.split(",");
   if(sArray.length == 1)
-    return double.parse(sArray[0]).toStringAsFixedNoZero(precision);
+    return double.parse(sArray[0]);
   var iArray = [];
   var length = sArray.length;
   var iter = 0;
   for(iter=0; iter<length; iter++)
     iArray.add(double.parse(sArray[iter]));
   var sum = iArray.fold(0, (a, b) => a + b);
-  var mean = sum/length;
-  return mean.toStringAsFixedNoZero(precision);
+  print((sum/length).runtimeType);
+  return (sum/length);
 }
 
-String median (String userInput, int precision) {
-  if(userInput == '')
-    return '0';
+double median (String userInput) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -35,15 +59,13 @@ String median (String userInput, int precision) {
   if(length % 2 == 1)
     {
       median = iArray[((length-1)/2).truncate()];
-      return median.toString();
+      return median;
     }
   median = (((iArray[((length-1)/2).floor()] + iArray[((length-1)/2).ceil()]))/2);
-  return median.toStringAsFixedNoZero(precision);
+  return median;
 }
 
-String mode (String userInput, int precision) {
-  if(userInput == '')
-    return '0';
+double mode (String userInput) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -70,12 +92,10 @@ String mode (String userInput, int precision) {
     if(value == modalValue)
       mode=key;
   });
-  return mode.toStringAsFixedNoZero(precision);
+  return mode;
 }
 
-String range (String userInput, int precision) {
-  if(userInput == '')
-    return '0';
+double range (String userInput) {
   var sArray = userInput.split(",");
   var iArray = [];
   var length = sArray.length;
@@ -83,34 +103,28 @@ String range (String userInput, int precision) {
   for(iter=0; iter<length; iter++)
     iArray.add(double.parse(sArray[iter]));
   iArray.sort();
-  return (iArray[length-1] - iArray[0]).toString();
+  return (iArray[length-1] - iArray[0]);
 
 }
 
-String variance (String userInput, int precision){
-  if(userInput == '')
-    return '0';
+double variance (String userInput){
   var sArray = userInput.split(",");
   var length = sArray.length;
   var iter = 0;
   var result = 0.0;
-  var avg = double.parse(mean(userInput, precision));
+  var avg = mean(userInput);
   for(iter=0; iter<length; iter++)
     result += pow(avg - double.parse(sArray[iter]), 2);
   result /= length;
-  return result.toStringAsFixedNoZero(precision);
+  return result;
 
 }
 
-String stddev (String userInput, int precision){
-  if(userInput == '')
-    return '0';
-  return (pow(double.parse(variance(userInput, 10)),0.5)).toStringAsFixed(precision);
+double stddev (String userInput){
+  return (pow(variance(userInput),0.5));
 
 }
 
-String cv (String userInput, int precision){
-  if(userInput == '')
-    return '0';
-  return (double.parse(stddev(userInput, 10))/double.parse(mean(userInput, 10))).toStringAsFixedNoZero(precision);
+double cv (String userInput){
+  return (stddev(userInput)/(mean(userInput)));
 }

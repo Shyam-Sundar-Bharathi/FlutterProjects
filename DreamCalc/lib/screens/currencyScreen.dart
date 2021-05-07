@@ -204,7 +204,7 @@ class _currencyState extends State<currency> {
                           ),
                           child: Center(
                             child: Text(
-                              codes[dropDownValueTo][1]+ ' ' + answer,
+                              answer == ''? answer : codes[dropDownValueTo][1]+ ' ' + answer,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,

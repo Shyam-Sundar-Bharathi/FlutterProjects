@@ -1,3 +1,4 @@
+import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/centTendCalc.dart';
@@ -67,7 +68,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "MEAN";
-                          result = mean(userInput.text, precision);
+                          result = centTend(userInput.text, precision,0);
                         });
                       },
                       child: Text(
@@ -86,7 +87,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "MEDIAN";
-                          result = median(userInput.text, precision);
+                          result = centTend(userInput.text, precision,1);
                         });
                       },
                       child: Text(
@@ -105,7 +106,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "MODE";
-                          result = mode(userInput.text, precision);
+                          result = centTend(userInput.text, precision,2);
                         });
                       },
                       child: Text(
@@ -129,7 +130,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "STANDARD DEVIATION";
-                          result = stddev(userInput.text, precision);
+                          result = centTend(userInput.text, precision,3);
                         });
                       },
                       child: Text(
@@ -148,7 +149,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "VARIANCE";
-                          result = variance(userInput.text, precision);
+                          result = centTend(userInput.text, precision,4);
                         });
                       },
                       child: Text(
@@ -172,7 +173,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "CV";
-                          result = cv(userInput.text, precision);
+                          result = centTend(userInput.text, precision,5);
                         });
                       },
                       child: Text(
@@ -191,7 +192,7 @@ class _centTendCalcState extends State<centTendCalc> {
                       onPressed: () {
                         setState(() {
                           choice = "RANGE";
-                          result = range(userInput.text, precision);
+                          result = centTend(userInput.text, precision, 6);
                         });
                       },
                       child: Text(
@@ -212,7 +213,7 @@ class _centTendCalcState extends State<centTendCalc> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  result,
+                  formatNumber(double.parse(result)).toString(),
                   style: TextStyle(
                     fontSize: 30,
                   ),

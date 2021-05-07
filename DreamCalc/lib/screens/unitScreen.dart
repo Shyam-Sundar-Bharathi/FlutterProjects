@@ -146,8 +146,11 @@ class _unitconversionState extends State<unitconversion> {
                       ),
                       onChanged: (String newValue) {
                         setState(() {
+                          if(newValue == unitChoiceTwo){
+                            unitChoiceTwo = unitChoiceOne;
+                          }
                           unitChoiceOne = newValue;
-                          userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
+                          userInputTwo.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision)));
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {
@@ -174,7 +177,7 @@ class _unitconversionState extends State<unitconversion> {
                         },
                         textAlign: TextAlign.right,
                         onChanged: (text){
-                            userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
+                            userInputOne.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision)));
                             },
                         controller: userInputTwo,
                         keyboardType: TextInputType.number,
@@ -210,8 +213,11 @@ class _unitconversionState extends State<unitconversion> {
                       ),
                       onChanged: (String newValue) {
                         setState(() {
+                          if(newValue == unitChoiceOne){
+                            unitChoiceOne = unitChoiceTwo;
+                          }
                           unitChoiceTwo = newValue;
-                          userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
+                          userInputOne.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision)));
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {

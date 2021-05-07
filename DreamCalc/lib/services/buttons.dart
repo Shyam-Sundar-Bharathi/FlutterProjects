@@ -20,28 +20,30 @@ class MyButton extends StatefulWidget {
 class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: widget.buttontapped,
-        onLongPress: widget.buttonlongpressed,
-        child: Padding(
-          padding: const EdgeInsets.all(0.5),
-          child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-            child: Container(
-              color: widget.color,
-              child: Center(
-                child: Text(
-                 widget.buttonText,
-                 style: TextStyle(
-                    color: widget.textColor,
-                    fontSize: widget.fontSize,
-                    fontWeight: FontWeight.bold,
+    return Container(
+      child: GestureDetector(
+          onTap: widget.buttontapped,
+          onLongPress: widget.buttonlongpressed,
+          child: Container(
+            padding: const EdgeInsets.all(0.5),
+            child: ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+              child: Container(
+                color: widget.color,
+                child: Center(
+                  child: Text(
+                   widget.buttonText,
+                   style: TextStyle(
+                      color: widget.textColor,
+                      fontSize: widget.fontSize,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-         ),
-        ),
+           ),
+          ),
+      ),
     );
   }
 }

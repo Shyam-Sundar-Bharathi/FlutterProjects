@@ -5,7 +5,7 @@ extension Ex on double {
 
 String convert(String unitElement, String unitChoiceOne, String unitChoiceTwo, String userInput, int precision){
   if(userInput == "")
-    return "";
+    return "0";
   if(unitElement.toLowerCase() == "temperature")
     return temperature(unitChoiceOne, unitChoiceTwo, userInput);
 

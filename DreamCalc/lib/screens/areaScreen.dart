@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dream_calc/calcs/areaCalc.dart';
 import 'package:dream_calc/services/drawer.dart';
+import 'package:dream_calc/services/formatNumber.dart';
 
 class areaCalc extends StatefulWidget {
   @override
@@ -91,7 +92,7 @@ class _areaCalcState extends State<areaCalc> {
                   iconSize: 72,
                   elevation: 16,
                   style: const TextStyle(
-                      color: Colors.black,
+                    color: Colors.black,
                     fontSize: 20,
                   ),
                   underline: Container(
@@ -120,7 +121,7 @@ class _areaCalcState extends State<areaCalc> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  result,
+                  formatNumber(double.parse(result)),
                   style: TextStyle(
                     fontSize: 25,
                   ),
