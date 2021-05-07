@@ -68,21 +68,21 @@ class _genCalcState extends State<genCalc> {
     if(cursorPos < 0)
       userInput.text += myText;
     else
-      {
-        final text = userInput.text;
-        final textSelection = userInput.selection;
-        final newText = text.replaceRange(
-          textSelection.start,
-          textSelection.end,
-          myText,
-        );
-        final myTextLength = myText.length;
-        userInput.text = newText;
-        userInput.selection = textSelection.copyWith(
-          baseOffset: textSelection.start + myTextLength,
-          extentOffset: textSelection.start + myTextLength,
-        );
-      }
+    {
+      final text = userInput.text;
+      final textSelection = userInput.selection;
+      final newText = text.replaceRange(
+        textSelection.start,
+        textSelection.end,
+        myText,
+      );
+      final myTextLength = myText.length;
+      userInput.text = newText;
+      userInput.selection = textSelection.copyWith(
+        baseOffset: textSelection.start + myTextLength,
+        extentOffset: textSelection.start + myTextLength,
+      );
+    }
     isOperator(myText)? null : evaluate(userInput.text);
   }
 
@@ -98,12 +98,12 @@ class _genCalcState extends State<genCalc> {
       if(operator=='-')
         userInput.text+= '(-' ;
       else
-        if(userInput.text[userInput.text.length-2]=='(')
-          return;
-        else
-          setState(() {
-            userInput.text = userInput.text.substring(0,userInput.text.length-1) + operator;
-          });
+      if(userInput.text[userInput.text.length-2]=='(')
+        return;
+      else
+        setState(() {
+          userInput.text = userInput.text.substring(0,userInput.text.length-1) + operator;
+        });
 
     else if(userInput.text[userInput.text.length-1]=='(')
       if(operator == '-')
@@ -146,41 +146,41 @@ class _genCalcState extends State<genCalc> {
     if(cursorPos < 0)
       userInput.text = userInput.text.substring(0, userInput.text.length - 1);
     else
-      {
-        final text = userInput.text;
-        final textSelection = userInput.selection;
-        final selectionLength = textSelection.end - textSelection.start;
-        // There is a selection.
-        if (selectionLength > 0) {
-          final newText = text.replaceRange(
-            textSelection.start,
-            textSelection.end,
-            '',
-          );
-          userInput.text = newText;
-          userInput.selection = textSelection.copyWith(
-            baseOffset: textSelection.start,
-            extentOffset: textSelection.start,
-          );
-        }
-        else
-          {
-
-            final offset = 1;
-            final newStart = textSelection.start - offset;
-            final newEnd = textSelection.start;
-            final newText = text.replaceRange(
-              newStart,
-              newEnd,
-              '',
-            );
-            userInput.text = newText;
-            userInput.selection = textSelection.copyWith(
-              baseOffset: newStart,
-              extentOffset: newStart,
-            );
-          }
+    {
+      final text = userInput.text;
+      final textSelection = userInput.selection;
+      final selectionLength = textSelection.end - textSelection.start;
+      // There is a selection.
+      if (selectionLength > 0) {
+        final newText = text.replaceRange(
+          textSelection.start,
+          textSelection.end,
+          '',
+        );
+        userInput.text = newText;
+        userInput.selection = textSelection.copyWith(
+          baseOffset: textSelection.start,
+          extentOffset: textSelection.start,
+        );
       }
+      else
+      {
+
+        final offset = 1;
+        final newStart = textSelection.start - offset;
+        final newEnd = textSelection.start;
+        final newText = text.replaceRange(
+          newStart,
+          newEnd,
+          '',
+        );
+        userInput.text = newText;
+        userInput.selection = textSelection.copyWith(
+          baseOffset: newStart,
+          extentOffset: newStart,
+        );
+      }
+    }
     if(userInput.text.length == 0)
       setState(() {
         answer="";
@@ -256,154 +256,153 @@ class _genCalcState extends State<genCalc> {
       ),
       drawer: myDrawer(),
       body: Column(
-          children: [
-            Expanded(
-              flex: Platform.isAndroid ? 31 : 48,
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.centerRight,
-                      child: TextField(
-                        readOnly: true,
-                        showCursor: true,
-                        textAlign: TextAlign.right,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                        controller: userInput,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.black,
-                        ),
+        children: [
+          Expanded(
+            flex: Platform.isAndroid ? 31 : 48,
+            child: Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: TextField(
+                      readOnly: true,
+                      showCursor: true,
+                      textAlign: TextAlign.right,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      controller: userInput,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(15),
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        answer == '' || answer == 'Incorrect Expression'? answer : formatNumber(double.parse(answer)).toString(),
-                        overflow: TextOverflow.clip,
-                        softWrap: false,
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              flex:100,
-              child: Container(
-                color: Colors.black87,
-                child: GridView.builder(
-                  itemCount: buttons.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
                   ),
-                  itemBuilder: (BuildContext context, int index){
-                    if(index == 0){
-                      return MyButton(
-                        buttontapped: (){
-                          print('tapped');
-                          tapped(index);
-                        },
-                        color: tappedIndex == index? Colors.green[700] : Colors.green[300],
-                        textColor: Colors.black,
-                        buttonText: buttons[index],
-                      );
-                    }
-                    //parenthesis
-                    if(index == 1){
-                      return MyButton(
-                        buttontapped: (){
-                          tapped(index);
-                          parenthesis();
-                          evaluate(userInput.text);
-                        },
-
-                        color: tappedIndex == index? Colors.blue : Colors.blueAccent,
-                        textColor: Colors.black,
-                        buttonText: buttons[index],
-                      );
-                    }
-                    //DELCLRBUTTON
-                     if(index == 3){
-                      return MyButton(
-                        buttontapped: (){
-                          tapped(index);
-                          backSpace();
-                          },
-                        buttonlongpressed: (){
-                          tapped(index);
-                          setState(() {
-                            userInput.text='';
-                            answer='';
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: tappedIndex == index ? Colors.red[500] : Colors.red[300],
-                        textColor: Colors.black,
-                        fontSize: 20.0,
-                      );
-                    }
-                    // Equal button
-                    else if (index == 18) {
-                      return MyButton(
-                        buttontapped: () {
-                          tapped(index);
-                          if((answer == '' || answer == '0') && userInput.text != '')
-                            setState(() {
-                              answer = "Incorrect Expression";
-                            });
-                          else if (answer == 'Incorrect Expression')
-                            null;
-                          else
-                            setState(() {
-                              userInput.text = answer;
-                              answer="";
-                            });
-                        },
-                        buttonText: buttons[index],
-                        color: tappedIndex == index? Colors.green : Colors.greenAccent[400],
-                        textColor: Colors.white,
-                      );
-                    }
-                    //other buttons
-                    else{
-                      return MyButton(
-                        buttontapped: () {
-                          tapped(index);
-                          if(isOperator(buttons[index]))
-                            insertOperator(buttons[index]);
-                          else
-                            setState(() {
-                              insertText(buttons[index]);
-                            });
-                          //isOperator(buttons[index]) ? null : evaluate(userInput.text);
-                        },
-                        buttonText: buttons[index],
-                        color: isOperator(buttons[index])
-                            ? tappedIndex == index? Colors.blue : Colors.blueAccent
-                            : tappedIndex == index? Colors.grey[400] : Colors.grey[200],
-                        textColor: isOperator(buttons[index])
-                            ? Colors.white
-                            : Colors.black,
-                      );
-                    }
-                  },
-                ),
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      answer == '' || answer == 'Incorrect Expression'? answer : formatNumber(double.parse(answer)).toString(),
+                      overflow: TextOverflow.clip,
+                      softWrap: false,
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            flex:100,
+            child: Container(
+              color: Colors.black87,
+              child: GridView.builder(
+                itemCount: buttons.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                ),
+                itemBuilder: (BuildContext context, int index){
+                  if(index == 0){
+                    return MyButton(
+                      buttontapped: (){
+                        print('tapped');
+                        tapped(index);
+                      },
+                      color: tappedIndex == index? Colors.green[700] : Colors.green[300],
+                      textColor: Colors.black,
+                      buttonText: buttons[index],
+                    );
+                  }
+                  //parenthesis
+                  if(index == 1){
+                    return MyButton(
+                      buttontapped: (){
+                        tapped(index);
+                        parenthesis();
+                        evaluate(userInput.text);
+                      },
+
+                      color: tappedIndex == index? Colors.blue : Colors.blueAccent,
+                      textColor: Colors.black,
+                      buttonText: buttons[index],
+                    );
+                  }
+                  //DELCLRBUTTON
+                  if(index == 3){
+                    return MyButton(
+                      buttontapped: (){
+                        tapped(index);
+                        backSpace();
+                      },
+                      buttonlongpressed: (){
+                        tapped(index);
+                        setState(() {
+                          userInput.text='';
+                          answer='';
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: tappedIndex == index ? Colors.red[500] : Colors.red[300],
+                      textColor: Colors.black,
+                      fontSize: 20.0,
+                    );
+                  }
+                  // Equal button
+                  else if (index == 18) {
+                    return MyButton(
+                      buttontapped: () {
+                        tapped(index);
+                        if((answer == '' || answer == '0') && userInput.text != '')
+                          setState(() {
+                            answer = "Incorrect Expression";
+                          });
+                        else if (answer == 'Incorrect Expression')
+                          null;
+                        else
+                          setState(() {
+                            userInput.text = answer;
+                            answer="";
+                          });
+                      },
+                      buttonText: buttons[index],
+                      color: tappedIndex == index? Colors.green : Colors.greenAccent[400],
+                      textColor: Colors.white,
+                    );
+                  }
+                  //other buttons
+                  else{
+                    return MyButton(
+                      buttontapped: () {
+                        tapped(index);
+                        if(isOperator(buttons[index]))
+                          insertOperator(buttons[index]);
+                        else
+                          setState(() {
+                            insertText(buttons[index]);
+                          });
+                        //isOperator(buttons[index]) ? null : evaluate(userInput.text);
+                      },
+                      buttonText: buttons[index],
+                      color: isOperator(buttons[index])
+                          ? tappedIndex == index? Colors.blue : Colors.blueAccent
+                          : tappedIndex == index? Colors.grey[400] : Colors.grey[200],
+                      textColor: isOperator(buttons[index])
+                          ? Colors.white
+                          : Colors.black,
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
