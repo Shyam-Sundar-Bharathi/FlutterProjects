@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'dart:io' show Platform;
+import 'package:dream_calc/screens/sciButtons.dart';
 import 'package:dream_calc/services/formatNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/services/drawer.dart';
@@ -28,14 +29,14 @@ class _genCalcState extends State<genCalc> {
   var cursorPos;
   var answer = '';
   final List<String> buttons = [
-    'MENU',
+    'Sci',
     '( )',
     '^',
     'DEL/CLR',
     '7',
     '8',
     '9',
-    '/',
+    '÷',
     '4',
     '5',
     '6',
@@ -44,8 +45,8 @@ class _genCalcState extends State<genCalc> {
     '2',
     '3',
     '-',
-    '0',
     '.',
+    '0',
     '=',
     '+',
   ];
@@ -57,7 +58,7 @@ class _genCalcState extends State<genCalc> {
   }
 
   bool isOperator(String x) {
-    if (x == '/' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' ) {
+    if (x == '/' || x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' ) {
       return true;
     }
     return false;
@@ -193,6 +194,7 @@ class _genCalcState extends State<genCalc> {
 
   void evaluate(String input) {
     String finaluserinput = input.replaceAll('x', '*');
+    finaluserinput = finaluserinput.replaceAll('÷', '/');
     Parser p = Parser();
     try{
       Expression exp = p.parse(finaluserinput);
@@ -299,20 +301,28 @@ class _genCalcState extends State<genCalc> {
             ),
           ),
           Expanded(
-            flex:100,
+            flex: 100,
             child: Container(
               color: Colors.black87,
               child: GridView.builder(
                 itemCount: buttons.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 0,
                   crossAxisCount: 4,
                 ),
                 itemBuilder: (BuildContext context, int index){
                   if(index == 0){
                     return MyButton(
-                      buttontapped: (){
+                      buttontapped: () async {
                         print('tapped');
                         tapped(index);
+                        final value = await Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => sciButtons()),
+                        );
+                        setState(() {
+                          insertText(value);
+                        });
                       },
                       color: tappedIndex == index? Colors.green[700] : Colors.green[300],
                       textColor: Colors.black,
@@ -366,7 +376,7 @@ class _genCalcState extends State<genCalc> {
                           null;
                         else
                           setState(() {
-                            userInput.text = answer;
+                            userInput.text = formatNumber(double.parse(answer)).toString();
                             answer="";
                           });
                       },
@@ -406,3 +416,4 @@ class _genCalcState extends State<genCalc> {
     );
   }
 }
+

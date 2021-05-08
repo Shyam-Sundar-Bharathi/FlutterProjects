@@ -1,8 +1,15 @@
 extension Ex on double {
-  String toStringAsFixedNoZero(int n) =>
-      double.parse(this.toStringAsFixed(n)).toString();
+  String toStringAsFixedNoZero(int n) {
+    String result = double.parse(this.toStringAsFixed(n)).toString();
+    int length = result.length;
+    if(result.substring(length-2,length) == '.0'){
+      return result.substring(0,length-2);
+    }
+    else {
+      return result;
+    }
+  }
 }
-
 String reverseString(String number){
   String reversedNumber = "";
   int numberOfCharacters = number.length - 1;

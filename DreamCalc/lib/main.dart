@@ -1,5 +1,6 @@
 import 'package:dream_calc/screens/currencyScreen.dart';
 import 'package:dream_calc/screens/quadraticScreen.dart';
+import 'package:dream_calc/screens/sciButtons.dart';
 import 'package:dream_calc/screens/unitScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/screens/genScreen.dart';
@@ -10,6 +11,7 @@ import 'package:dream_calc/screens/volumeScreen.dart';
 import 'package:dream_calc/screens/settings.dart';
 import 'package:dream_calc/screens/percentScreen.dart';
 import 'package:flutter/services.dart';
+import 'package:dream_calc/screens/cubicScreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +29,8 @@ void main() {
         '/percentage' : (context) => percentCalc(),
         '/currency' : (context) => currency(),
         '/quadratic' : (context) => quadraticCalc(),
+        '/cubic' : (context) => cubicCalc(),
+        '/scientific' : (context) => sciButtons()
       },
     ));
   }

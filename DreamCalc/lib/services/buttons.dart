@@ -21,11 +21,13 @@ class _MyButtonState extends State<MyButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //padding: const EdgeInsets.all(10),
+
       child: GestureDetector(
           onTap: widget.buttontapped,
           onLongPress: widget.buttonlongpressed,
           child: Container(
-            padding: const EdgeInsets.all(0.5),
+            padding: const EdgeInsets.all(5),
             child: ClipRRect(
             borderRadius: BorderRadius.circular(50),
               child: Container(
