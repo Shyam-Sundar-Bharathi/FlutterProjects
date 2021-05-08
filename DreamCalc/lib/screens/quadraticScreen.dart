@@ -14,8 +14,7 @@ class _quadraticCalcState extends State<quadraticCalc> {
   TextEditingController userInputA = new TextEditingController();
   TextEditingController userInputB = new TextEditingController();
   TextEditingController userInputC = new TextEditingController();
-  String answer = '';
-
+  List<String> answers = ['','',''];
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -68,8 +67,10 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           controller: userInputA,
                           keyboardType: TextInputType.number,
                           enableInteractiveSelection: true,
-                          onChanged: (text){
+                          onSubmitted: (text){
+                            FocusScope.of(context).requestFocus(FocusNode());
                             setState(() {
+                              answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
                             });
                           },
                           inputFormatters: [
@@ -108,8 +109,10 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           controller: userInputB,
                           keyboardType: TextInputType.number,
                           enableInteractiveSelection: true,
-                          onChanged: (text){
+                          onSubmitted: (text){
+                            FocusScope.of(context).requestFocus(FocusNode());
                             setState(() {
+                              answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
                             });
                           },
                           inputFormatters: [
@@ -148,8 +151,10 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           controller: userInputC,
                           keyboardType: TextInputType.number,
                           enableInteractiveSelection: true,
-                          onChanged: (text){
+                          onSubmitted: (text){
+                            FocusScope.of(context).requestFocus(FocusNode());
                             setState(() {
+                              answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
                             });
                           },
                           inputFormatters: [
@@ -176,8 +181,9 @@ class _quadraticCalcState extends State<quadraticCalc> {
                       minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                     ),
                     onPressed: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       setState(() {
-                        answer = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
+                        answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
                       });
                     },
                     child: Text(
@@ -188,7 +194,102 @@ class _quadraticCalcState extends State<quadraticCalc> {
                     ),
                   )
                 ],
-              )
+              ),
+                SizedBox(height: 20,),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Root 1 : ',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: Center(
+                              child: Text(
+                                answers[0],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Root 2 : ',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: Center(
+                              child: Text(
+                                answers[1],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Disc : ',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            height: 70,
+                            decoration: BoxDecoration(
+                              border: Border.all(),
+                            ),
+                            child: Center(
+                              child: Text(
+                                answers[2],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               ],
             ),
 
