@@ -1,9 +1,5 @@
 import 'dart:math';
-
-extension Ex on double {
-  String toStringAsFixedNoZero(int n) =>
-      double.parse(this.toStringAsFixed(n)).toString();
-}
+import 'package:dream_calc/services/formatNumber.dart';
 
 String centTend(String userInput, int precision, int choice){
   if(userInput == '')
@@ -27,7 +23,7 @@ String centTend(String userInput, int precision, int choice){
       case 6: result = range(userInput);
       break;
     }
-  return result.toStringAsPrecision(precision);
+  return result.toStringAsFixedNoZero(precision);
 }
 
 

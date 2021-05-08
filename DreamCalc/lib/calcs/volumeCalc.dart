@@ -1,9 +1,5 @@
 import 'dart:math';
-
-extension Ex on double {
-  String toStringAsFixedNoZero(int n) =>
-      double.parse(this.toStringAsFixed(n)).toString();
-}
+import 'package:dream_calc/services/formatNumber.dart';
 
 String volume (String userInput, String dropDownValue, int precision) {
   if(userInput == '')

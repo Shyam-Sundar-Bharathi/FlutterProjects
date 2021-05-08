@@ -242,7 +242,7 @@ class _genCalcState extends State<genCalc> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     return Scaffold(
       //resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(
           "General Caculator",
@@ -276,7 +276,7 @@ class _genCalcState extends State<genCalc> {
                       controller: userInput,
                       style: TextStyle(
                         fontSize: 25,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -289,7 +289,7 @@ class _genCalcState extends State<genCalc> {
                       softWrap: false,
                       style: TextStyle(
                         fontSize: 30,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

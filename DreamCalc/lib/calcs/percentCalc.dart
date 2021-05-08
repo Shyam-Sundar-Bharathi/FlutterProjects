@@ -1,7 +1,4 @@
-extension Ex on double {
-  String toStringAsFixedNoZero(int n) =>
-      double.parse(this.toStringAsFixed(n)).toString();
-}
+import 'package:dream_calc/services/formatNumber.dart';
 
 String percentOne(String userInputOne, String userInputTwo, int precision){
   if(userInputOne == '' || userInputTwo == '')
