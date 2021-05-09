@@ -30,7 +30,7 @@ class _sciButtonsState extends State<sciButtons> {
     '|x|',
     '%',
     '+/-',
-    '!',
+    '^',
     'x²',
     'x³',
   ];

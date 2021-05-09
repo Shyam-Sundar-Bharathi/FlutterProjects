@@ -30,8 +30,8 @@ class _genCalcState extends State<genCalc> {
   var answer = '';
   final List<String> buttons = [
     'Sci',
-    '( )',
-    '^',
+    '(',
+    ')',
     'DEL/CLR',
     '7',
     '8',
@@ -58,7 +58,7 @@ class _genCalcState extends State<genCalc> {
   }
 
   bool isOperator(String x) {
-    if (x == '/' || x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' ) {
+    if (x == '/' || x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' || x=='(' || x==')' ) {
       return true;
     }
     return false;
@@ -84,7 +84,7 @@ class _genCalcState extends State<genCalc> {
         extentOffset: textSelection.start + myTextLength,
       );
     }
-    isOperator(myText)? null : evaluate(userInput.text);
+    isOperator(myText)? answer='' : evaluate(userInput.text);
   }
 
   void insertOperator(String operator) {
@@ -114,30 +114,6 @@ class _genCalcState extends State<genCalc> {
 
     else
       insertText(operator);
-  }
-
-  void parenthesis() {
-    int open = '('.allMatches(userInput.text).length;
-    int close = ')'.allMatches(userInput.text).length;
-    if(open==0){
-      userInput.text+='(';
-      return;
-    }
-    if(open>close){
-      if(isOperator(userInput.text[userInput.text.length - 1]) || userInput.text[userInput.text.length - 1]=='('){
-        userInput.text+='(';
-      }
-      else
-        userInput.text+=')';
-    }
-    else if(open==close){
-      if(isOperator(userInput.text[userInput.text.length - 1])){
-        userInput.text+='(';
-      }
-      else
-        userInput.text+="x(";
-    }
-
   }
 
   void backSpace() {
@@ -211,10 +187,10 @@ class _genCalcState extends State<genCalc> {
         int close = ')'.allMatches(userInput.text).length;
         if(open == close + 1)
           finaluserinput += ')';
-        else{
-          finaluserinput = finaluserinput.replaceAll('(', '');
-          finaluserinput = finaluserinput.replaceAll(')', '');
-        }
+        // else{
+        //   finaluserinput = finaluserinput.replaceAll('(', '');
+        //   finaluserinput = finaluserinput.replaceAll(')', '');
+        // }
         if(finaluserinput.length == 0){
           setState(() {
             answer='';
@@ -329,21 +305,7 @@ class _genCalcState extends State<genCalc> {
                       buttonText: buttons[index],
                     );
                   }
-                  //parenthesis
-                  if(index == 1){
-                    return MyButton(
-                      buttontapped: (){
-                        tapped(index);
-                        parenthesis();
-                        evaluate(userInput.text);
-                      },
 
-                      color: tappedIndex == index? Colors.blue : Colors.blueAccent,
-                      textColor: Colors.black,
-                      buttonText: buttons[index],
-                    );
-                  }
-                  //DELCLRBUTTON
                   if(index == 3){
                     return MyButton(
                       buttontapped: (){

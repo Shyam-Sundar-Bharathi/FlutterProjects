@@ -16,7 +16,7 @@ class _cubicCalcState extends State<cubicCalc> {
   TextEditingController userInputB = new TextEditingController();
   TextEditingController userInputC = new TextEditingController();
   TextEditingController userInputD = new TextEditingController();
-  List<String> answers = ['','',''];
+  List<String> answers = ['','','',''];
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,6 +46,13 @@ class _cubicCalcState extends State<cubicCalc> {
                       style: TextStyle(
                         fontSize: 25,
                       ),
+                    ),
+                  ),
+                  SizedBox(height: 2,),
+                  Text(
+                    'Please note that d is an integer',
+                    style: TextStyle(
+                      fontSize: 15
                     ),
                   ),
                   SizedBox(height: 30,),
