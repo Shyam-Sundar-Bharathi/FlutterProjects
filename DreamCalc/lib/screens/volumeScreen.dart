@@ -22,7 +22,7 @@ class _volumeCalcState extends State<volumeCalc> {
     'CUBE' : "Enter side length",
     'SPHERE' : "Enter radius",
     'CUBOID' : "Enter length, breadth, height (comma separated)",
-    'CONE' : "Enter base radius, height (comma separated) \nor side a,b,c (comma separated)",
+    'CONE' : "Enter base radius, height (comma separated)",
     'CYLINDER' : "Enter base radius, height (comma separated)",
   };
 

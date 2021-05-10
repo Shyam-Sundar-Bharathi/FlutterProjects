@@ -22,7 +22,7 @@ class _areaCalcState extends State<areaCalc> {
     'SQUARE' : "Enter side length",
     'CIRCLE' : "Enter radius",
     'RECTANGLE' : "Enter length, breadth (comma separated)",
-    'TRIANGLE' : "Enter base, height (comma separated) \nor side a,b,c (comma separated)",
+    'TRIANGLE' : "Enter base, height or sides a,b,c (comma separated)",
     'PARALLELOGRAM' : "Enter base, height (comma separated)",
     'RHOMBUS' : "Enter diagonal 1, diagonal 2 (comma separated)",
   };

@@ -22,8 +22,13 @@ String centTend(String userInput, int precision, int choice){
       break;
       case 6: result = range(userInput);
       break;
+      case 7: result = gm(userInput);
+      break;
+      case 8: result = hm(userInput);
+      break;
+
     }
-  return result.toStringAsFixedNoZero(precision);
+  return formatNumber(double.parse(result.toStringAsFixedNoZero(precision)));
 }
 
 
@@ -123,4 +128,26 @@ double stddev (String userInput){
 
 double cv (String userInput){
   return (stddev(userInput)/(mean(userInput)));
+}
+
+double gm(String userInput){
+  var sArray = userInput.split(",");
+  double result=1;
+  var length = sArray.length;
+  var iter = 0;
+  for(iter=0; iter<length; iter++)
+    result *= double.parse(sArray[iter]);
+  result = pow(result, 1/length);
+  return result;
+}
+
+double hm(String userInput){
+  var sArray = userInput.split(",");
+  double result=0;
+  var length = sArray.length;
+  var iter = 0;
+  for(iter=0; iter<length; iter++)
+    result += 1/double.parse(sArray[iter]);
+  result = length/result;
+  return result;
 }

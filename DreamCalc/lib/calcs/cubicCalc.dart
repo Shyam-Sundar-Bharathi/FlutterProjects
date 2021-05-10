@@ -42,7 +42,7 @@ List<String> cubeCalc(String A, String B, String C, String D){
   rootThree[0] = double.parse(rootThree[0]).toStringAsFixedNoZero(4);
 
   if(rootOne[1]!=''){
-    rootOne[1] = double.parse(rootOne[1].toString().replaceAll('i', '')).toStringAsFixedNoZero(4) + ' i';
+    rootOne[1] = formatNumber(double.parse(double.parse(rootOne[1].toString().replaceAll('i', '')).toStringAsFixedNoZero(4))) + ' i';
   }
   if(rootTwo[1]!=''){
     rootTwo[1] = double.parse(rootTwo[1].toString().replaceAll('i', '')).toStringAsFixedNoZero(4) + ' i';
@@ -55,5 +55,5 @@ List<String> cubeCalc(String A, String B, String C, String D){
   rootsFinal[0] = rootOne[0] + ' ' + sign[0] + ' ' + rootOne[1];
   rootsFinal[1] = rootTwo[0] + ' ' + sign[1] + ' ' + rootTwo[1];
   rootsFinal[2] = rootThree[0] + ' ' + sign[2] + ' ' + rootThree[1];
-  return [rootsFinal[0],rootsFinal[1],rootsFinal[2],equation.discriminant().toDouble().toStringAsFixedNoZero(4)];
+  return [rootsFinal[0],rootsFinal[1],rootsFinal[2],formatNumber(double.parse(equation.discriminant().toDouble().toStringAsFixedNoZero(4)))];
 }

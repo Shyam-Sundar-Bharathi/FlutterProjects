@@ -27,7 +27,7 @@ class _centTendCalcState extends State<centTendCalc> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Central Tendencies Caculator",
+            "Central Tendency Caculator",
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
@@ -66,6 +66,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "MEAN";
                           result = centTend(userInput.text, precision,0);
@@ -85,6 +86,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "MEDIAN";
                           result = centTend(userInput.text, precision,1);
@@ -104,6 +106,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "MODE";
                           result = centTend(userInput.text, precision,2);
@@ -128,6 +131,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "STANDARD DEVIATION";
                           result = centTend(userInput.text, precision,3);
@@ -147,6 +151,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "VARIANCE";
                           result = centTend(userInput.text, precision,4);
@@ -171,6 +176,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "CV";
                           result = centTend(userInput.text, precision,5);
@@ -190,6 +196,7 @@ class _centTendCalcState extends State<centTendCalc> {
                         minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         setState(() {
                           choice = "RANGE";
                           result = centTend(userInput.text, precision, 6);
@@ -197,6 +204,51 @@ class _centTendCalcState extends State<centTendCalc> {
                       },
                       child: Text(
                         "RANGE",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 20,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                        minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                      ),
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        setState(() {
+                          choice = "GM";
+                          result = centTend(userInput.text, precision,7);
+                        });
+                      },
+                      child: Text(
+                        "GEOMETRIC MEAN",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                        minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                      ),
+                      onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        setState(() {
+                          choice = "HM";
+                          result = centTend(userInput.text, precision, 8);
+                        });
+                      },
+                      child: Text(
+                        "HARMONIC MEAN",
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -213,7 +265,7 @@ class _centTendCalcState extends State<centTendCalc> {
                 ),
                 SizedBox(height: 10,),
                 Text(
-                  formatNumber(double.parse(result)).toString(),
+                  result,
                   style: TextStyle(
                     fontSize: 30,
                   ),

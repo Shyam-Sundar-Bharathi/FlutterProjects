@@ -9,10 +9,10 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:math_expressions/math_expressions.dart';
 
-extension Ex on double {
-  String toStringAsFixedNoZero(int n) =>
-      double.parse(this.toStringAsFixed(n)).toString();
-}
+// extension Ex on double {
+//   String toStringAsFixedNoZero(int n) =>
+//       double.parse(this.toStringAsFixed(n)).toString();
+// }
 
 class genCalc extends StatefulWidget {
   @override
@@ -58,7 +58,7 @@ class _genCalcState extends State<genCalc> {
   }
 
   bool isOperator(String x) {
-    if (x == '/' || x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^' || x=='(' || x==')' ) {
+    if (x == '/' || x == '÷' || x == 'x' || x == '-' || x == '+' || x == '=' || x == '^') {
       return true;
     }
     return false;
@@ -67,7 +67,7 @@ class _genCalcState extends State<genCalc> {
   void insertText(String myText) {
     cursorPos = userInput.selection.base.offset;
     if(cursorPos < 0)
-      userInput.text += myText;
+      myText == '.' && userInput.text == '' ? userInput.text += '0.' : userInput.text += myText;
     else
     {
       final text = userInput.text;
@@ -171,6 +171,7 @@ class _genCalcState extends State<genCalc> {
   void evaluate(String input) {
     String finaluserinput = input.replaceAll('x', '*');
     finaluserinput = finaluserinput.replaceAll('÷', '/');
+    finaluserinput = finaluserinput.replaceAll(',','');
     Parser p = Parser();
     try{
       Expression exp = p.parse(finaluserinput);
@@ -182,15 +183,21 @@ class _genCalcState extends State<genCalc> {
       //print("END TRY");
     }
     on FormatException {
-      try{
         int open = '('.allMatches(userInput.text).length;
         int close = ')'.allMatches(userInput.text).length;
-        if(open == close + 1)
-          finaluserinput += ')';
-        // else{
-        //   finaluserinput = finaluserinput.replaceAll('(', '');
-        //   finaluserinput = finaluserinput.replaceAll(')', '');
-        // }
+        if(open>close){
+          for(int i=0; i< open - close; i++){
+            finaluserinput += ')';
+          }
+        }
+        else if(close>open){
+          String temp = finaluserinput;
+          finaluserinput='';
+          for(int i=0; i < close-open; i++){
+            finaluserinput+='(';
+          }
+          finaluserinput+=temp;
+        }
         if(finaluserinput.length == 0){
           setState(() {
             answer='';
@@ -203,12 +210,6 @@ class _genCalcState extends State<genCalc> {
         setState(() {
           answer = eval.toString();
         });
-      }
-      on Exception{
-        setState(() {
-          answer = 'Incorrect Expression';
-        });
-      }
     }
   }
 
@@ -262,7 +263,7 @@ class _genCalcState extends State<genCalc> {
                     padding: EdgeInsets.all(15),
                     alignment: Alignment.centerRight,
                     child: Text(
-                      answer == '' || answer == 'Incorrect Expression'? answer : formatNumber(double.parse(answer)).toString(),
+                      answer == '' || answer == 'Incorrect Expression'? answer : double.parse(answer).toStringAsFixedNoZero(precision),
                       overflow: TextOverflow.clip,
                       softWrap: false,
                       style: TextStyle(
@@ -305,6 +306,19 @@ class _genCalcState extends State<genCalc> {
                       buttonText: buttons[index],
                     );
                   }
+                  if(index == 1 || index == 2){
+                    return MyButton(
+                      buttontapped: (){
+                        tapped(index);
+                        setState(() {
+                          insertText(buttons[index]);
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: tappedIndex == index? Colors.blue : Colors.blueAccent,
+                      textColor: Colors.white,
+                    );
+                  }
 
                   if(index == 3){
                     return MyButton(
@@ -338,7 +352,7 @@ class _genCalcState extends State<genCalc> {
                           null;
                         else
                           setState(() {
-                            userInput.text = formatNumber(double.parse(answer)).toString();
+                            userInput.text = double.parse(answer).toStringAsFixedNoZero(precision);
                             answer="";
                           });
                       },

@@ -1,3 +1,5 @@
+import 'package:flutter/services.dart';
+
 extension Ex on double {
   String toStringAsFixedNoZero(int n) {
     String result = double.parse(this.toStringAsFixed(n)).toString();
@@ -10,6 +12,7 @@ extension Ex on double {
     }
   }
 }
+
 String reverseString(String number){
   String reversedNumber = "";
   int numberOfCharacters = number.length - 1;
@@ -23,6 +26,9 @@ String reverseString(String number){
 String formatNumber(double number, {bool isCurrency = false}){
   if(number == 0)
     return "";
+  bool isNegative = number<0? true : false ;
+  number = isNegative? -number : number;
+  print(isNegative);
   String formattedNumber = "";
   int n=0;
   String decimal;
@@ -39,7 +45,8 @@ String formatNumber(double number, {bool isCurrency = false}){
       decimal = '00';
   }
   else
-    decimal = number.toString().split('.')[1];
+    decimal = number.toString().contains('.')? number.toString().split('.')[1] : '';
+  print(decimal);
 
 
   int numberI = number.truncate();
@@ -54,5 +61,8 @@ String formatNumber(double number, {bool isCurrency = false}){
       n=0;
     }
   }
-  return double.parse(decimal) == 0.0? reverseString(formattedNumber)  : reverseString(formattedNumber) + '.' + decimal;
+  print(formattedNumber);
+  String result = isNegative? '-' + reverseString(formattedNumber) : reverseString(formattedNumber);
+  print(result);
+  return double.parse(decimal) == 0.0? result  : result + '.' + decimal;
 }

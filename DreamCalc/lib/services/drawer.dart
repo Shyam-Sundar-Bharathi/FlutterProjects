@@ -148,7 +148,7 @@ class _myDrawerState extends State<myDrawer> {
               });
             },
             title: Text(
-              "CENTRAL TENDENCIES",
+              "CENTRAL TENDENCY",
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.black87,

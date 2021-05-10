@@ -54,7 +54,7 @@ class _quadraticCalcState extends State<quadraticCalc> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Enter a : ',
+                        'a : ',
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -87,16 +87,9 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20,)
-                    ],
-                  ),
-                  SizedBox(height: 20,),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                      SizedBox(width: 20,),
                       Text(
-                        'Enter b : ',
+                        'b : ',
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -129,7 +122,6 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20,)
                     ],
                   ),
                   SizedBox(height: 20,),
@@ -138,7 +130,7 @@ class _quadraticCalcState extends State<quadraticCalc> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Enter c : ',
+                        'c : ',
                         style: TextStyle(
                           fontSize: 20,
                         ),
@@ -171,28 +163,30 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 20,)
+                      SizedBox(width: 20,),
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
+                            minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
+                          ),
+                          onPressed: () {
+                            FocusScope.of(context).requestFocus(FocusNode());
+                            setState(() {
+                              answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
+                            });
+                          },
+                          child: Text(
+                            "CALCULATE",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   SizedBox(height: 20,),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.grey[300]),
-                      minimumSize: MaterialStateProperty.resolveWith((states) => Size(70, 50)),
-                    ),
-                    onPressed: () {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      setState(() {
-                        answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
-                      });
-                    },
-                    child: Text(
-                      "CALCULATE",
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
-                    ),
-                  )
                 ],
               ),
                 SizedBox(height: 20,),
