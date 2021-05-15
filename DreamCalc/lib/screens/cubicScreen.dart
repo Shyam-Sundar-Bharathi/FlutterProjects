@@ -34,7 +34,7 @@ class _cubicCalcState extends State<cubicCalc> {
             ),
           ),
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
             child : Container(
               padding: EdgeInsets.fromLTRB(20, 30, 20, 20),

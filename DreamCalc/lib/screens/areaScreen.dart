@@ -31,11 +31,13 @@ class _areaCalcState extends State<areaCalc> {
   Widget build(BuildContext context) {
     data = data.isEmpty ? data : ModalRoute.of(context).settings.arguments;
     precision = data['precision'];
+    print(precision+100);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: Scaffold(
+        backgroundColor: Colors.grey[200],
         appBar: AppBar(
           title: Text(
             "Area of 2D Shapes Caculator",
@@ -47,7 +49,7 @@ class _areaCalcState extends State<areaCalc> {
           ),
           backgroundColor: Colors.black,
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(10.0),
@@ -134,4 +136,3 @@ class _areaCalcState extends State<areaCalc> {
     );
   }
 }
-

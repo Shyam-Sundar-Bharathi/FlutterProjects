@@ -44,7 +44,7 @@ class _percentCalcState extends State<percentCalc> {
             ),
           ),
         ),
-      drawer: myDrawer(),
+      //drawer: myDrawer(),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10.0),
         child: Column(
@@ -81,11 +81,13 @@ class _percentCalcState extends State<percentCalc> {
                         ),
                       ),
                     ),
-                    Text(
-                      "  % of  ",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                    FittedBox(
+                      child: Text(
+                        "  % of  ",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Expanded(
@@ -116,11 +118,14 @@ class _percentCalcState extends State<percentCalc> {
                   ],
                 ),
                 SizedBox(height: 20,),
-                Text(
-                  'is',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold
+                FittedBox(
+                  child:
+                  Text(
+                    'is',
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold
+                    ),
                   ),
                 ),
                 SizedBox(height: 20,),
@@ -131,12 +136,14 @@ class _percentCalcState extends State<percentCalc> {
                     border: Border.all(),
                   ),
                   child: Center(
-                    child: Text(
-                      answer1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                    child: FittedBox(
+                      child: Text(
+                        answer1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -223,11 +230,13 @@ class _percentCalcState extends State<percentCalc> {
                     border: Border.all(),
                   ),
                   child: Center(
-                    child: Text(
-                      answer2 + " %",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                    child: FittedBox(
+                      child: Text(
+                        answer2 + " %",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),

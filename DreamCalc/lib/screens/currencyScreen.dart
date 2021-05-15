@@ -66,7 +66,7 @@ class _currencyState extends State<currency> {
             ),
           ),
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(10),
@@ -203,11 +203,13 @@ class _currencyState extends State<currency> {
                             border: Border.all(),
                           ),
                           child: Center(
-                            child: Text(
-                              answer == ''? answer : codes[dropDownValueTo][1]+ ' ' + answer,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            child: FittedBox(
+                              child: Text(
+                                answer == ''? answer : codes[dropDownValueTo][1]+ ' ' + answer,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),

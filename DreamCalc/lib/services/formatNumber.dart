@@ -25,10 +25,9 @@ String reverseString(String number){
 
 String formatNumber(double number, {bool isCurrency = false}){
   if(number == 0)
-    return "";
+    return "0";
   bool isNegative = number<0? true : false ;
   number = isNegative? -number : number;
-  print(isNegative);
   String formattedNumber = "";
   int n=0;
   String decimal;
@@ -46,7 +45,6 @@ String formatNumber(double number, {bool isCurrency = false}){
   }
   else
     decimal = number.toString().contains('.')? number.toString().split('.')[1] : '';
-  print(decimal);
 
 
   int numberI = number.truncate();
@@ -61,8 +59,7 @@ String formatNumber(double number, {bool isCurrency = false}){
       n=0;
     }
   }
-  print(formattedNumber);
+
   String result = isNegative? '-' + reverseString(formattedNumber) : reverseString(formattedNumber);
-  print(result);
   return double.parse(decimal) == 0.0? result  : result + '.' + decimal;
 }

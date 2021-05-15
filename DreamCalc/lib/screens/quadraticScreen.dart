@@ -32,7 +32,7 @@ class _quadraticCalcState extends State<quadraticCalc> {
             ),
           ),
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child : Container(
             padding: EdgeInsets.fromLTRB(20, 30, 20, 20),
@@ -172,9 +172,12 @@ class _quadraticCalcState extends State<quadraticCalc> {
                           ),
                           onPressed: () {
                             FocusScope.of(context).requestFocus(FocusNode());
-                            setState(() {
-                              answers = (userInputA.text == '' || userInputB.text == '' || userInputC.text == '')? null : quadCalc(userInputA.text, userInputB.text, userInputC.text);
-                            });
+                            if(!(userInputA.text == '' || userInputB.text == '' || userInputC.text == '')){
+                              setState(() {
+                                answers =  quadCalc(userInputA.text, userInputB.text, userInputC.text);
+                              });
+                            }
+
                           },
                           child: Text(
                             "CALCULATE",

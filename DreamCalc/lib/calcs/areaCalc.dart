@@ -6,6 +6,7 @@ String area (String userInput, String dropDownValue, int precision) {
     return '0';
   if(dropDownValue == "SQUARE"){
     var side = double.parse(userInput);
+    print(precision);
     return (side*side).toStringAsFixedNoZero(precision);
   }
   else if(dropDownValue == "CIRCLE"){

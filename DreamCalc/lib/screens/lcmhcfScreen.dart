@@ -33,7 +33,7 @@ class _lcmhcfCalcState extends State<lcmhcfCalc> {
           ),
           backgroundColor: Colors.black,
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(10.0),

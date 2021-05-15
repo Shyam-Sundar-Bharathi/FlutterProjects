@@ -32,16 +32,21 @@ class _MyButtonState extends State<MyButton> {
             borderRadius: BorderRadius.circular(50),
               child: Container(
                 color: widget.color,
-                child: Center(
-                  child: Text(
-                   widget.buttonText,
-                   style: TextStyle(
-                      color: widget.textColor,
-                      fontSize: widget.fontSize,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Center(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                         widget.buttonText,
+                         maxLines: 1,
+                         style: TextStyle(
+                            color: widget.textColor,
+                            fontSize: widget.fontSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                   ),
-                ),
+
               ),
            ),
           ),

@@ -37,16 +37,17 @@ class _volumeCalcState extends State<volumeCalc> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            "Volume of 3D Shapes Caculator",
+            "Volume",
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
+          centerTitle: false,
           backgroundColor: Colors.black,
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(10.0),

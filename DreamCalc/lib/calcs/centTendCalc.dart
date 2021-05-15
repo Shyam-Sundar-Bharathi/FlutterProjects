@@ -1,12 +1,13 @@
 import 'dart:math';
 import 'package:dream_calc/services/formatNumber.dart';
+import 'package:extended_math/extended_math.dart';
 
 String centTend(String userInput, int precision, int choice){
   if(userInput == '')
     return '0';
   if(userInput.endsWith(','))
     userInput = userInput.substring(0,userInput.length-1);
-  double result;
+  dynamic result;
     switch(choice){
       case 0: result = mean(userInput);
       break;
@@ -28,7 +29,7 @@ String centTend(String userInput, int precision, int choice){
       break;
 
     }
-  return formatNumber(double.parse(result.toStringAsFixedNoZero(precision)));
+  return choice == 2? result : formatNumber(double.parse(result.toStringAsFixedNoZero(precision)));
 }
 
 
@@ -66,34 +67,16 @@ double median (String userInput) {
   return median;
 }
 
-double mode (String userInput) {
+String mode (String userInput) {
   var sArray = userInput.split(",");
-  var iArray = [];
+  var iArray = <num>[];
   var length = sArray.length;
   var iter = 0;
   var mode = 0.0;
   for(iter=0; iter<length; iter++)
     iArray.add(double.parse(sArray[iter]));
-  var popular = Map();
-
-  iArray.forEach((number) {
-    if(!popular.containsKey(number)) {
-      popular[number] = 1;
-    } else {
-      popular[number] +=1;
-    }
-  });
-  var values = [];
-  popular.forEach((key, value) {
-    values.add(value);
-  });
-  values.sort();
-  var modalValue = values[values.length - 1];
-  popular.forEach((key, value) {
-    if(value == modalValue)
-      mode=key;
-  });
-  return mode;
+  final c = CentralTendency(Vector(iArray));
+  return c.mode().toString();
 }
 
 double range (String userInput) {

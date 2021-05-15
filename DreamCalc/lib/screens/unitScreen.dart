@@ -60,7 +60,7 @@ class _unitconversionState extends State<unitconversion> {
           ),
           backgroundColor: Colors.black,
         ),
-        drawer: myDrawer(),
+        //drawer: myDrawer(),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(10.0),
@@ -110,7 +110,7 @@ class _unitconversionState extends State<unitconversion> {
                         },
                         textAlign: TextAlign.right,
                         onChanged: (text){
-                            userInputTwo.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision)));
+                            userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
                             },
                         controller: userInputOne,
                         keyboardType: TextInputType.number,
@@ -150,7 +150,7 @@ class _unitconversionState extends State<unitconversion> {
                             unitChoiceTwo = unitChoiceOne;
                           }
                           unitChoiceOne = newValue;
-                          userInputTwo.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision)));
+                          userInputTwo.text = convert(unitElementsValue, unitChoiceOne, unitChoiceTwo, userInputOne.text, precision);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {
@@ -177,7 +177,8 @@ class _unitconversionState extends State<unitconversion> {
                         },
                         textAlign: TextAlign.right,
                         onChanged: (text){
-                            userInputOne.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision)));
+                            userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
+                            print(precision);
                             },
                         controller: userInputTwo,
                         keyboardType: TextInputType.number,
@@ -217,7 +218,7 @@ class _unitconversionState extends State<unitconversion> {
                             unitChoiceOne = unitChoiceTwo;
                           }
                           unitChoiceTwo = newValue;
-                          userInputOne.text = formatNumber(double.parse(convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision)));
+                          userInputOne.text = convert(unitElementsValue, unitChoiceTwo, unitChoiceOne, userInputTwo.text, precision);
                         });
                       },
                       items: unitChoices[unitElementsValue].map<DropdownMenuItem<String>>((String value) {

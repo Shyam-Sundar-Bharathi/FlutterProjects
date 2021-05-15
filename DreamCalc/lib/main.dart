@@ -1,7 +1,8 @@
+import 'package:dream_calc/screens/complexScreen.dart';
 import 'package:dream_calc/screens/currencyScreen.dart';
 import 'package:dream_calc/screens/quadraticScreen.dart';
-import 'package:dream_calc/screens/sciButtons.dart';
 import 'package:dream_calc/screens/unitScreen.dart';
+import 'package:dream_calc/screens/vectorScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:dream_calc/screens/genScreen.dart';
 import 'package:dream_calc/screens/lcmhcfScreen.dart';
@@ -19,7 +20,7 @@ void main() {
     runApp(MaterialApp(
       initialRoute: '/',
       routes: {
-        '/' : (context) => genCalc(),
+        '/' : (context) => home(),
         '/lcmhcf' : (context) => lcmhcfCalc(),
         '/centTend' : (context) => centTendCalc(),
         '/area' : (context) => areaCalc(),
@@ -30,7 +31,8 @@ void main() {
         '/currency' : (context) => currency(),
         '/quadratic' : (context) => quadraticCalc(),
         '/cubic' : (context) => cubicCalc(),
-        '/scientific' : (context) => sciButtons()
+        '/vector' : (context) => vector(),
+        '/complex' : (context) => complex(),
       },
     ));
   }
