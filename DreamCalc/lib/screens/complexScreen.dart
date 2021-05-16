@@ -267,6 +267,10 @@ class _complexState extends State<complex> {
                       ),
                       onPressed: () {
                         FocusScope.of(context).requestFocus(FocusNode());
+                        setState(() {
+                          choice = "A * B";
+                          result = mul(a1.text,b1.text,a2.text,b2.text);
+                        });
                       },
                       child: Text(
                         "A * B",
@@ -282,6 +286,10 @@ class _complexState extends State<complex> {
                       ),
                       onPressed: () {
                         FocusScope.of(context).requestFocus(FocusNode());
+                        setState(() {
+                          choice = "A / B";
+                          result = div(a1.text,b1.text,a2.text,b2.text);
+                        });
                       },
                       child: Text(
                         "A / B",

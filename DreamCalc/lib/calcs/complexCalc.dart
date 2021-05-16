@@ -1,5 +1,6 @@
 import 'package:extended_math/extended_math.dart';
 import 'package:dream_calc/services/formatNumber.dart';
+import 'package:flutter/material.dart';
 
 String mod(String a, String b){
   final c = Complex(re: double.parse(a), im: double.parse(b));
@@ -37,9 +38,26 @@ String arg(String a, String b){
 String roots(String a, String b, int power){
   final c = Complex(re: double.parse(a), im: double.parse(b));
   List roots = c.rootsOf(power);
-  if(power == 2){
-    String root1 = roots[0];
-    String root2 = roots[1];
-  }
   return c.rootsOf(power).toString();
+}
+
+String mul(String a1, String b1, String a2, String b2) {
+  double A1 = double.parse(a1);
+  double B1 = double.parse(b1);
+  double A2 = double.parse(a2);
+  double B2 = double.parse(b2);
+  final c1 = Complex(re: A1, im: B1);
+  final c2 = Complex(re: A2, im: B2);
+  return (c1*c2).toString();
+}
+
+
+String div(String a1, String b1, String a2, String b2) {
+  double A1 = double.parse(a1);
+  double B1 = double.parse(b1);
+  double A2 = double.parse(a2);
+  double B2 = double.parse(b2);
+  final c1 = Complex(re: A1, im: B1);
+  final c2 = Complex(re: A2, im: B2);
+  return (c1/c2).toString();
 }

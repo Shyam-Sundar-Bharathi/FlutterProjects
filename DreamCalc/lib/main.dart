@@ -1,5 +1,8 @@
 import 'package:dream_calc/screens/complexScreen.dart';
 import 'package:dream_calc/screens/currencyScreen.dart';
+import 'package:dream_calc/screens/linearChoiceScreen.dart';
+import 'package:dream_calc/screens/linearThreeScreen.dart';
+import 'package:dream_calc/screens/linearTwoScreen.dart';
 import 'package:dream_calc/screens/quadraticScreen.dart';
 import 'package:dream_calc/screens/unitScreen.dart';
 import 'package:dream_calc/screens/vectorScreen.dart';
@@ -33,6 +36,9 @@ void main() {
         '/cubic' : (context) => cubicCalc(),
         '/vector' : (context) => vector(),
         '/complex' : (context) => complex(),
+        '/linearChoice' : (context) => linearChoice(),
+        '/linearTwo' : (context) => linearTwo(),
+        '/linearThree' : (context) => linearThree()
       },
     ));
   }

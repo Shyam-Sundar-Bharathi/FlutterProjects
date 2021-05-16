@@ -23,7 +23,7 @@ class _homeState extends State<home> {
     8 : ['CURRENCY\nCONVERSION', '/currency'],
     9 : ['VECTOR', '/vector'],
     10 : ['COMPLEX\nNUMBERS', '/complex'],
-    11 : ['SETTINGS', '/settings']
+    11 : ['LINEAR\nEQUATIONS', '/linearChoice']
   };
 
   @override
@@ -42,6 +42,19 @@ class _homeState extends State<home> {
         ),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+            Icons.settings,
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.blue[200],
+        onPressed: () async {
+          result = await Navigator.pushNamed(context, '/settings');
+          setState(() {
+            precision = result['precision'];
+          });
+        },
+      ),
       //drawer: myDrawer(),
       body: Column(
         children: [
@@ -55,38 +68,7 @@ class _homeState extends State<home> {
                     crossAxisCount: 3,
                   ),
                   itemBuilder: (BuildContext context, int index){
-                  if(index == 11){
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 5,
-                      child: Card(
-                        color: Colors.grey,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Colors.grey[100]),
-                          ),
-                          child: FittedBox(
-                            child: Icon(
-                                Icons.settings,
-                              color: Colors.black,
-                              size: 30,
-                            ),
-                          ),
-                          onPressed: () async {
-                            result = await Navigator.pushNamed(context, '/settings');
-                            setState(() {
-                              precision = result['precision'];
-                            });
-                          },
-                        ),
-                      ),
-                    );;
-                  }
 
-                  else
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     height: 5,
