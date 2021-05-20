@@ -123,13 +123,31 @@ class _HomeState extends State<Home> {
               title: Text(
                 "Edit Location",
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 20,
                   color: Colors.white,
                 ),
               ),
               tileColor: Colors.blue[800],
               leading: Icon(
                 Icons.edit_location_sharp,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 10,),
+            ListTile(
+              onTap: (){
+                Navigator.pushNamed(context, '/currency');
+              },
+              title: Text(
+                "Currency Conversion",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+              tileColor: Colors.blue[800],
+              leading: Icon(
+                Icons.attach_money,
                 color: Colors.white,
               ),
             ),
